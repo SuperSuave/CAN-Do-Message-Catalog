@@ -140,7 +140,7 @@ export default function App() {
     if (!localStorage.getItem(STORAGE_KEY_CATALOG)) {
       const fetchSources = [
         `https://raw.githubusercontent.com/${repoConfig.owner}/${repoConfig.repo}/${repoConfig.branch}/${repoConfig.filePath}`,
-        '/can_do_catalog.json'
+        './can_do_catalog.json'
       ];
 
       const tryFetch = async () => {

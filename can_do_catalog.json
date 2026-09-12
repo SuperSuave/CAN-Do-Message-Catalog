@@ -1,0 +1,113 @@
+{
+  "catalog_version": "3.1.0",
+  "vehicles": [
+    {
+      "id": "all_egmp",
+      "name": "All Gen5W Models",
+      "make": "Universal",
+      "model": "All Models",
+      "trim": "All Trims",
+      "region": "universal",
+      "family": "all_egmp",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "hud",
+        "remote_park",
+        "v2l"
+      ],
+      "notes": "Applies across E-GMP platform vehicles (Hyundai Ioniq 5/6, Kia EV6, Genesis GV60)."
+    },
+    {
+      "id": "ioniq5_se_sel",
+      "name": "Hyundai Ioniq 5",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "SE / SEL",
+      "region": "NA",
+      "family": "egmp_ioniq5",
+      "features": [
+        "heated_seats",
+        "power_tailgate",
+        "camera_360",
+        "v2l"
+      ],
+      "notes": "North American specification Ioniq 5 SE and SEL trims."
+    },
+    {
+      "id": "ev6_gt_line",
+      "name": "Kia EV6",
+      "make": "Kia",
+      "model": "EV6",
+      "trim": "GT-Line",
+      "region": "NA",
+      "family": "egmp_ev6",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "hud",
+        "v2l"
+      ],
+      "notes": "Kia EV6 GT-Line with premium comfort package."
+    }
+  ],
+  "commands": [
+    {
+      "id": "rear_left_seat_heating",
+      "name": "Rear Left Seat Heating",
+      "category": "Climate & Comfort",
+      "subcategory": "Seat Heating",
+      "can_id": "0x4A2",
+      "action_can_id": "0x4A2",
+      "bus": 0,
+      "roles": ["action", "state"],
+      "requires_feature": "heated_seats",
+      "tags": ["all_egmp"],
+      "options": [
+        {
+          "label": "High",
+          "payload": "* * * * * F8 * *",
+          "match_payload": "* * * * * F8 * *",
+          "default": true
+        },
+        {
+          "label": "Medium",
+          "payload": "* * * * * AA * *",
+          "match_payload": "* * * * * AA * *"
+        },
+        {
+          "label": "Low",
+          "payload": "* * * * * 55 * *",
+          "match_payload": "* * * * * 55 * *"
+        },
+        {
+          "label": "Off",
+          "payload": "* * * * * 00 * *",
+          "match_payload": "* * * * * 00 * *"
+        }
+      ],
+      "contributor": {
+        "name": "Marie CANDo",
+        "github": "TidyingCANDo"
+      },
+      "notes": "Standard E-GMP rear seat heater status and control frame."
+    }
+  ],
+  "conditions": [
+    {
+      "id": "cond_always",
+      "name": "Always (Unconditional)",
+      "type": "always",
+      "category": "Schedule & Calendar",
+      "roles": ["condition"]
+    }
+  ]
+}

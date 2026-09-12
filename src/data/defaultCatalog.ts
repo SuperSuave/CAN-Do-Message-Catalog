@@ -1,0 +1,1953 @@
+import { Catalog } from '../types/catalog';
+
+export const DEFAULT_CATALOG: Catalog = {
+  "catalog_version": "3.1.0",
+  "vehicles": [
+    {
+      "id": "all_egmp",
+      "name": "All Gen5W Models",
+      "make": "Universal",
+      "model": "All Models",
+      "trim": "All Trims",
+      "region": "universal",
+      "family": "all_egmp",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "touch_bar",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi5_limited",
+      "name": "Limited",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "Limited",
+      "region": "us",
+      "family": "hyundai_ioniq5",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi5_sel",
+      "name": "SEL",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "SEL",
+      "region": "us",
+      "family": "hyundai_ioniq5",
+      "features": [
+        "heated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi5_se",
+      "name": "SE / Standard Range",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "SE / Standard Range",
+      "region": "us",
+      "family": "hyundai_ioniq5",
+      "features": [
+        "heated_seats",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi5_n",
+      "name": "Ioniq 5 N",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "Ioniq 5 N",
+      "region": "global",
+      "family": "hyundai_ioniq5",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi5_ultimate",
+      "name": "Ultimate / Namsan",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "Ultimate / Namsan",
+      "region": "eu",
+      "family": "hyundai_ioniq5",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi5_premium",
+      "name": "Premium / N-Line",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "Premium / N-Line",
+      "region": "eu",
+      "family": "hyundai_ioniq5",
+      "features": [
+        "heated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi5_advance",
+      "name": "Advance / SE Connect",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "trim": "Advance / SE Connect",
+      "region": "eu",
+      "family": "hyundai_ioniq5",
+      "features": [
+        "heated_seats",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "ev6_gtline",
+      "name": "GT-Line",
+      "make": "Kia",
+      "model": "EV6",
+      "trim": "GT-Line",
+      "region": "us",
+      "family": "kia_ev6",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "touch_bar",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "ev6_wind",
+      "name": "Wind",
+      "make": "Kia",
+      "model": "EV6",
+      "trim": "Wind",
+      "region": "us",
+      "family": "kia_ev6",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "touch_bar",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "ev6_gt",
+      "name": "GT",
+      "make": "Kia",
+      "model": "EV6",
+      "trim": "GT",
+      "region": "global",
+      "family": "kia_ev6",
+      "features": [
+        "heated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "touch_bar",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "ev6_light",
+      "name": "Light / Standard Range",
+      "make": "Kia",
+      "model": "EV6",
+      "trim": "Light / Standard Range",
+      "region": "us",
+      "family": "kia_ev6",
+      "features": [
+        "heated_seats",
+        "touch_bar",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "ev6_gtline_s",
+      "name": "GT-Line S",
+      "make": "Kia",
+      "model": "EV6",
+      "trim": "GT-Line S",
+      "region": "eu",
+      "family": "kia_ev6",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "touch_bar",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "ev6_air",
+      "name": "Air",
+      "make": "Kia",
+      "model": "EV6",
+      "trim": "Air",
+      "region": "eu",
+      "family": "kia_ev6",
+      "features": [
+        "heated_seats",
+        "heated_wheel",
+        "touch_bar",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi6_limited",
+      "name": "Limited",
+      "make": "Hyundai",
+      "model": "Ioniq 6",
+      "trim": "Limited",
+      "region": "us",
+      "family": "hyundai_ioniq6",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi6_sel",
+      "name": "SEL",
+      "make": "Hyundai",
+      "model": "Ioniq 6",
+      "trim": "SEL",
+      "region": "us",
+      "family": "hyundai_ioniq6",
+      "features": [
+        "heated_seats",
+        "power_tailgate",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi6_se",
+      "name": "SE",
+      "make": "Hyundai",
+      "model": "Ioniq 6",
+      "trim": "SE",
+      "region": "us",
+      "family": "hyundai_ioniq6",
+      "features": [
+        "heated_seats",
+        "power_tailgate",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi6_ultimate",
+      "name": "Ultimate / First Edition",
+      "make": "Hyundai",
+      "model": "Ioniq 6",
+      "trim": "Ultimate / First Edition",
+      "region": "eu",
+      "family": "hyundai_ioniq6",
+      "features": [
+        "heated_seats",
+        "ventilated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "camera_360",
+        "sunroof",
+        "asd",
+        "preconditioning"
+      ]
+    },
+    {
+      "id": "hi6_premium",
+      "name": "Premium",
+      "make": "Hyundai",
+      "model": "Ioniq 6",
+      "trim": "Premium",
+      "region": "eu",
+      "family": "hyundai_ioniq6",
+      "features": [
+        "heated_seats",
+        "heated_wheel",
+        "power_tailgate",
+        "asd",
+        "preconditioning"
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "id": "sw_star",
+      "name": "Star (⭐) Button",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * * * 0*",
+      "to_payload": "* * * * * 1*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_mode",
+      "name": "Mode Button",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * 0*",
+      "to_payload": "* * 4*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_speak",
+      "name": "Voice / Speak Button",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * *0",
+      "to_payload": "* * *1",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_call",
+      "name": "Call / Phone Button",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * *0",
+      "to_payload": "* * *4",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_vol_in",
+      "name": "Volume Press / Mute",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * *0",
+      "to_payload": "* * * *1",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_vol_up",
+      "name": "Volume Up",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * * *0",
+      "to_payload": "* * * * *1",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_vol_down",
+      "name": "Volume Down",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * 0*",
+      "to_payload": "* * * 4*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_skip_up",
+      "name": "Seek / Skip Up",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * 0*",
+      "to_payload": "* * * 1*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_skip_down",
+      "name": "Seek / Skip Down",
+      "category": "Steering Wheel",
+      "subcategory": "Media & Audio Controls",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * *0",
+      "to_payload": "* * * *4",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_ok",
+      "name": "OK Button",
+      "category": "Steering Wheel",
+      "subcategory": "Cluster & Menu Navigation",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * * * * 0*",
+      "to_payload": "* * * * * * 1*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_menu_down",
+      "name": "Menu Down Button",
+      "category": "Steering Wheel",
+      "subcategory": "Cluster & Menu Navigation",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * * * * *0",
+      "to_payload": "* * * * * * *1",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_menu_up",
+      "name": "Menu Up Button",
+      "category": "Steering Wheel",
+      "subcategory": "Cluster & Menu Navigation",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * * * * 0*",
+      "to_payload": "* * * * * * 4*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "sw_menu_press",
+      "name": "Menu OK / Press Button",
+      "category": "Steering Wheel",
+      "subcategory": "Cluster & Menu Navigation",
+      "state_can_id": "0x448",
+      "bus": 0,
+      "from_payload": "* * * * * * 0*",
+      "to_payload": "* * * * * * 1*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "avn_star",
+      "name": "AVN Dash Star (⭐) Button",
+      "category": "Dashboard / Center Console",
+      "state_can_id": "0x652",
+      "bus": 0,
+      "from_payload": "* *0",
+      "to_payload": "* *4",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "ev6_mode_strip",
+      "name": "EV6 Touch Bar Mode Switch",
+      "tags": ["kia_ev6"],
+      "requires_feature": "touch_bar",
+      "category": "Dashboard / Center Console",
+      "state_can_id": "0x652",
+      "bus": 0,
+      "from_payload": "* * * 0*",
+      "to_payload": "* * * 5*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "camera_btn",
+      "name": "360° Surround View Camera Button",
+      "requires_feature": "camera_360",
+      "category": "Dashboard / Center Console",
+      "state_can_id": "0x476",
+      "bus": 0,
+      "from_payload": "* * 42",
+      "to_payload": "* * 52",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "cluster_brightness",
+      "name": "Cluster Brightness (+ / -)",
+      "category": "Dashboard / Center Console",
+      "state_can_id": "0x474",
+      "bus": 0,
+      "roles": ["trigger"],
+      "options": [
+        {
+          "label": "Brightness Up (+)",
+          "from_payload": "* * * * * * * 0A",
+          "to_payload": "* * * * * * * 4A",
+          "default": true
+        },
+        {
+          "label": "Brightness Down (-)",
+          "from_payload": "* * * * * * * 0A",
+          "to_payload": "* * * * * * * 8A"
+        }
+      ]
+    },
+    {
+      "id": "heated_wheel_btn",
+      "name": "Heated Steering Wheel Button",
+      "requires_feature": "heated_wheel",
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Steering Wheel Comfort",
+      "tags": ["steering_wheel", "heated_wheel"],
+      "state_can_id": "0x418",
+      "bus": 0,
+      "from_payload": "* * 00",
+      "to_payload": "* * 01",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "rear_left_seat_heating",
+      "name": "Rear Left Seat Heating State & Control",
+      "tags": [
+        "all_egmp"
+      ],
+      "requires_feature": "heated_seats",
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Rear Seats Comfort",
+      "state_can_id": "0x438",
+      "action_can_id": "0x4A2",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition",
+        "action"
+      ],
+      "options": [
+        {
+          "label": "High",
+          "from_payload": "* 11",
+          "to_payload": "* * * * * * 8F *",
+          "match_payload": "* 41 * * * * * *",
+          "popup": "Rear Left Seat: High",
+          "default": true,
+          "steps": [
+            { "payload": "* * * * * * 8F *", "repeat": 3 },
+            { "payload": "* * * * * * FF *", "repeat": 3 }
+          ]
+        },
+        {
+          "label": "Low",
+          "from_payload": "* 11",
+          "to_payload": "* * * * * * 6F *",
+          "match_payload": "* 31 * * * * * *",
+          "popup": "Rear Left Seat: Low",
+          "steps": [
+            { "payload": "* * * * * * 6F *", "repeat": 3 },
+            { "payload": "* * * * * * FF *", "repeat": 3 }
+          ]
+        },
+        {
+          "label": "Off",
+          "from_payload": "* !11",
+          "to_payload": "* * * * * * 2F *",
+          "match_payload": "* 11 * * * * * *",
+          "popup": "Rear Left Seat: Off",
+          "steps": [
+            { "payload": "* * * * * * 2F *", "repeat": 3 },
+            { "payload": "* * * * * * FF *", "repeat": 3 }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "driver_seat_heat",
+      "name": "Driver Seat Heating Active",
+      "requires_feature": "heated_seats",
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Driver Seat Comfort",
+      "tags": ["seats", "driver_seat", "heat"],
+      "state_can_id": "0x496",
+      "bus": 0,
+      "from_payload": "12",
+      "to_payload": "42",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "pass_seat_heat",
+      "name": "Passenger Seat Heating Active",
+      "requires_feature": "heated_seats",
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Passenger Seat Comfort",
+      "tags": ["seats", "passenger_seat", "heat"],
+      "state_can_id": "0x475",
+      "bus": 0,
+      "from_payload": "12",
+      "to_payload": "42",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "climate_sync_toggle",
+      "name": "Climate SYNC Button Toggle",
+      "category": "Comfort & Climate",
+      "state_can_id": "0x4A0",
+      "bus": 0,
+      "from_payload": "* * * 0B",
+      "to_payload": "* * * 0F",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "climate_driver_only",
+      "name": "Driver Only / Heat Mode Toggle",
+      "category": "Comfort & Climate",
+      "state_can_id": "0x41D",
+      "bus": 0,
+      "from_payload": "* * * * 0D",
+      "to_payload": "* * * * 0F",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "climate_rear_defog",
+      "name": "Rear Defogger & Mirrors Active",
+      "category": "Comfort & Climate",
+      "state_can_id": "0x541",
+      "bus": 0,
+      "from_payload": "* * * * 0*",
+      "to_payload": "* * * * 1*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "climate_temp_status",
+      "name": "Target Temperature Change",
+      "category": "Comfort & Climate",
+      "state_can_id": "0x380",
+      "bus": 0,
+      "from_payload": "",
+      "to_payload": "",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "climate_fan_active",
+      "name": "HVAC Fan Started",
+      "category": "Comfort & Climate",
+      "state_can_id": "0x31B",
+      "bus": 0,
+      "from_payload": "* * * 0*",
+      "to_payload": "* * * 2*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "climate_recirc_on",
+      "name": "Cabin Recirculation Toggled",
+      "category": "Comfort & Climate",
+      "state_can_id": "0x31B",
+      "bus": 0,
+      "from_payload": "* * * * 0*",
+      "to_payload": "* * * * 4*",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "ambient_color_trig",
+      "name": "Ambient Lighting Color Changed",
+      "category": "Ambient & Interior Lighting",
+      "state_can_id": "0x4AD",
+      "bus": 0,
+      "from_payload": "* * * * 00 00 00 00",
+      "to_payload": "!00 !02 !08 !20 00 00 00 00",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "car_ready_state",
+      "name": "Car READY State Transition",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x038",
+      "bus": 0,
+      "from_payload": "*0",
+      "to_payload": "*4",
+      "roles": ["trigger"]
+    },
+    {
+      "id": "driver_door",
+      "name": "Driver Door",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x521",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Opened / Open",
+          "from_payload": "00",
+          "to_payload": "01",
+          "match_payload": "* * * 01 * * * *",
+          "default": true
+        },
+        {
+          "label": "Closed / Shut",
+          "from_payload": "01",
+          "to_payload": "00",
+          "match_payload": "* * * 00 * * * *"
+        }
+      ]
+    },
+    {
+      "id": "pass_door",
+      "name": "Passenger Door",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x521",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Opened / Open",
+          "from_payload": "*0",
+          "to_payload": "*4",
+          "match_payload": "* * * *4 * * *",
+          "default": true
+        },
+        {
+          "label": "Closed / Shut",
+          "from_payload": "*4",
+          "to_payload": "*0",
+          "match_payload": "* * * *0 * * *"
+        }
+      ]
+    },
+    {
+      "id": "trunk",
+      "name": "Trunk / Tailgate",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x414",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Opened / Open",
+          "from_payload": "* * * 00",
+          "to_payload": "* * * 01",
+          "match_payload": "* * * 01 * * *",
+          "default": true
+        },
+        {
+          "label": "Closed / Shut",
+          "from_payload": "* * * 01",
+          "to_payload": "* * * 00",
+          "match_payload": "* * * 00 * * *"
+        }
+      ]
+    },
+    {
+      "id": "charge_port",
+      "name": "Charge Port Door",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x3AA",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Opened / Open",
+          "from_payload": "* * * * 00",
+          "to_payload": "* * * * 02",
+          "match_payload": "* * * * 02 * * *",
+          "default": true
+        },
+        {
+          "label": "Closed / Shut",
+          "from_payload": "* * * * 02",
+          "to_payload": "* * * * 00",
+          "match_payload": "* * * * 00 * * *"
+        }
+      ]
+    },
+    {
+      "id": "hood",
+      "name": "Hood / Front Trunk",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x541",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Opened / Open",
+          "from_payload": "* * 0*",
+          "to_payload": "* * 2*",
+          "match_payload": "* * 2* * * * * *",
+          "default": true
+        },
+        {
+          "label": "Closed / Shut",
+          "from_payload": "* * 2*",
+          "to_payload": "* * 0*",
+          "match_payload": "* * 0* * * * * *"
+        }
+      ]
+    },
+    {
+      "id": "sunroof",
+      "name": "Sunroof",
+      "requires_feature": "sunroof",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x541",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Opened / Tilt",
+          "from_payload": "* * * * * * * 0*",
+          "to_payload": "* * * * * * * 2*",
+          "match_payload": "* * * * * * * 2*",
+          "default": true
+        },
+        {
+          "label": "Closed / Shut",
+          "from_payload": "* * * * * * * 2*",
+          "to_payload": "* * * * * * * 0*",
+          "match_payload": "* * * * * * * 0*"
+        }
+      ]
+    },
+    {
+      "id": "hazard_lights",
+      "name": "Hazard Warning Lights",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x541",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Turned ON",
+          "from_payload": "* * * * 0*",
+          "to_payload": "* * * * 2*",
+          "match_payload": "* * * * 2* * * *",
+          "default": true
+        },
+        {
+          "label": "Turned OFF",
+          "from_payload": "* * * * 2*",
+          "to_payload": "* * * * 0*",
+          "match_payload": "* * * * 0* * * *"
+        }
+      ]
+    },
+    {
+      "id": "wipers",
+      "name": "Windshield Wipers",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x541",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Turned ON",
+          "from_payload": "* * * 0*",
+          "to_payload": "* * * 1*",
+          "match_payload": "* * * 1* * * * *",
+          "default": true
+        },
+        {
+          "label": "Turned OFF",
+          "from_payload": "* * * 1*",
+          "to_payload": "* * * 0*",
+          "match_payload": "* * * 0* * * * *"
+        }
+      ]
+    },
+    {
+      "id": "brake_pedal",
+      "name": "Brake Pedal",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x412",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Pressed",
+          "from_payload": "* * * * * * 00",
+          "to_payload": "* * * * * * 04",
+          "match_payload": "* * * * * * 04 *",
+          "default": true
+        },
+        {
+          "label": "Released",
+          "from_payload": "* * * * * * 04",
+          "to_payload": "* * * * * * 00",
+          "match_payload": "* * * * * * 00 *"
+        }
+      ]
+    },
+    {
+      "id": "power_state",
+      "name": "Vehicle Ignition / Power State",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x435",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Ignition ON / Ready",
+          "from_payload": "* * * * * * * FF",
+          "to_payload": "* * * * * * * 00",
+          "match_payload": "* * * * * * * 00",
+          "default": true
+        },
+        {
+          "label": "Ignition OFF / Asleep",
+          "from_payload": "* * * * * * * 00",
+          "to_payload": "* * * * * * * FF",
+          "match_payload": "* * * * * * * FF"
+        }
+      ]
+    },
+    {
+      "id": "doors_lock_state",
+      "name": "Door Locks",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x411",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Unlocked / Unlock",
+          "from_payload": "* * 0*",
+          "to_payload": "* * 4*",
+          "match_payload": "* * 4* * * * * *",
+          "default": true
+        },
+        {
+          "label": "Locked / Lock",
+          "from_payload": "* * 4*",
+          "to_payload": "* * 0*",
+          "match_payload": "* * 0* * * * * *"
+        }
+      ]
+    },
+    {
+      "id": "driver_seatbelt",
+      "name": "Driver Seatbelt",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x411",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Buckled",
+          "from_payload": "* * * * * 0*",
+          "to_payload": "* * * * * 4*",
+          "match_payload": "* * * * * 04 * *",
+          "default": true
+        },
+        {
+          "label": "Unbuckled",
+          "from_payload": "* * * * * 4*",
+          "to_payload": "* * * * * 0*",
+          "match_payload": "* * * * * 00 * *"
+        }
+      ]
+    },
+    {
+      "id": "pass_seatbelt",
+      "name": "Passenger Seatbelt",
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x411",
+      "bus": 0,
+      "roles": ["trigger", "condition"],
+      "options": [
+        {
+          "label": "Buckled",
+          "from_payload": "* * * * 0*",
+          "to_payload": "* * * * 1*",
+          "match_payload": "* * * * 01 * * *",
+          "default": true
+        },
+        {
+          "label": "Unbuckled",
+          "from_payload": "* * * * 1*",
+          "to_payload": "* * * * 0*",
+          "match_payload": "* * * * 00 * * *"
+        }
+      ]
+    },
+    {
+      "id": "act_persistent_preconditioning",
+      "name": "Persistent Preconditioning (21°C / 70°F)",
+      "type": "precondition",
+      "precon_mode": "persistent",
+      "precon_press": "short",
+      "category": "Battery Preconditioning",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_continuous_preconditioning",
+      "name": "Continuous Preconditioning (High Demand)",
+      "type": "precondition",
+      "precon_mode": "continuous",
+      "precon_press": "short",
+      "category": "Battery Preconditioning",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_single_cycle_preconditioning",
+      "name": "Single Cycle Preconditioning (Once)",
+      "type": "precondition",
+      "precon_mode": "once",
+      "precon_press": "short",
+      "category": "Battery Preconditioning",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_cancel_preconditioning",
+      "name": "Cancel / Turn Off Preconditioning",
+      "type": "precondition",
+      "precon_mode": "cancel",
+      "precon_press": "short",
+      "category": "Battery Preconditioning",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_live_batt_temp_voltage",
+      "name": "Live Batt Temp & Voltage",
+      "type": "popup",
+      "popup_message": "Batt: {battery_temp}C ({voltage}V)",
+      "popup_message_imperial": "Batt: {battery_temp_f}F ({voltage}V)",
+      "category": "Cluster OSD Popups",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_min_max_batt_temp_range",
+      "name": "Min / Max Batt Temp Range",
+      "type": "popup",
+      "popup_message": "Batt: {temp_min}C to {temp_max}C",
+      "popup_message_imperial": "Batt: {temp_min}F to {temp_max}F",
+      "category": "Cluster OSD Popups",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_preconditioning_status_temp",
+      "name": "Preconditioning Status & Temp",
+      "type": "popup",
+      "popup_message": "Precon: {status} ({battery_temp}C)",
+      "popup_message_imperial": "Precon: {status} ({battery_temp_f}F)",
+      "category": "Cluster OSD Popups",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_charge_port_opened_toast",
+      "name": "Charge Port Opened Toast",
+      "type": "popup",
+      "popup_message": "CHARGE PORT OPEN",
+      "category": "Cluster OSD Popups",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_sport_mode_active_toast",
+      "name": "Sport Mode Active Toast",
+      "type": "popup",
+      "popup_message": "SPORT MODE ACTIVE",
+      "category": "Cluster OSD Popups",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_ac_dc_max_charge_limit",
+      "name": "AC & DC Max Charge Limit (Both)",
+      "type": "can_tx",
+      "state_can_id": "0x4C5",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Charge Limit: 80%",
+      "options": [
+        {
+          "label": "50%",
+          "payload": "00 00 00 00 64 64 00 00",
+          "popup": "Charge Limit: 50%"
+        },
+        {
+          "label": "60%",
+          "payload": "00 00 00 00 78 78 00 00",
+          "popup": "Charge Limit: 60%"
+        },
+        {
+          "label": "70%",
+          "payload": "00 00 00 00 8C 8C 00 00",
+          "popup": "Charge Limit: 70%"
+        },
+        {
+          "label": "80%",
+          "payload": "00 00 00 00 A0 A0 00 00",
+          "popup": "Charge Limit: 80%",
+          "default": true
+        },
+        {
+          "label": "90%",
+          "payload": "00 00 00 00 B4 B4 00 00",
+          "popup": "Charge Limit: 90%"
+        },
+        {
+          "label": "100%",
+          "payload": "00 00 00 00 C8 C8 00 00",
+          "popup": "Charge Limit: 100%"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 00 A0 A0 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "EV Charging Limits",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_ac_level_2_charge_limit",
+      "name": "AC Level 2 Charge Limit",
+      "type": "can_tx",
+      "state_can_id": "0x4C5",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "AC Limit: 80%",
+      "options": [
+        {
+          "label": "50%",
+          "payload": "00 00 00 00 64 00 00 00",
+          "popup": "AC Limit: 50%"
+        },
+        {
+          "label": "60%",
+          "payload": "00 00 00 00 78 00 00 00",
+          "popup": "AC Limit: 60%"
+        },
+        {
+          "label": "70%",
+          "payload": "00 00 00 00 8C 00 00 00",
+          "popup": "AC Limit: 70%"
+        },
+        {
+          "label": "80%",
+          "payload": "00 00 00 00 A0 00 00 00",
+          "popup": "AC Limit: 80%",
+          "default": true
+        },
+        {
+          "label": "90%",
+          "payload": "00 00 00 00 B4 00 00 00",
+          "popup": "AC Limit: 90%"
+        },
+        {
+          "label": "100%",
+          "payload": "00 00 00 00 C8 00 00 00",
+          "popup": "AC Limit: 100%"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 00 A0 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "EV Charging Limits",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_dc_fast_charge_limit",
+      "name": "DC Fast Charge Limit",
+      "type": "can_tx",
+      "state_can_id": "0x4C5",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "DC Limit: 80%",
+      "options": [
+        {
+          "label": "50%",
+          "payload": "00 00 00 00 00 64 00 00",
+          "popup": "DC Limit: 50%"
+        },
+        {
+          "label": "60%",
+          "payload": "00 00 00 00 00 78 00 00",
+          "popup": "DC Limit: 60%"
+        },
+        {
+          "label": "70%",
+          "payload": "00 00 00 00 00 8C 00 00",
+          "popup": "DC Limit: 70%"
+        },
+        {
+          "label": "80%",
+          "payload": "00 00 00 00 00 A0 00 00",
+          "popup": "DC Limit: 80%",
+          "default": true
+        },
+        {
+          "label": "90%",
+          "payload": "00 00 00 00 00 B4 00 00",
+          "popup": "DC Limit: 90%"
+        },
+        {
+          "label": "100%",
+          "payload": "00 00 00 00 00 C8 00 00",
+          "popup": "DC Limit: 100%"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 00 00 A0 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "EV Charging Limits",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_driver_seat_comfort",
+      "name": "Driver Seat Comfort Level",
+      "requires_feature": "heated_seats",
+      "type": "can_tx",
+      "state_can_id": "0x4A2",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Dr Seat: Comfort Set",
+      "options": [
+        {
+          "label": "Vent High (-3)",
+          "payload": "00 00 00 00 50 00 00 00",
+          "popup": "Dr Seat: Vent High"
+        },
+        {
+          "label": "Vent Med (-2)",
+          "payload": "00 00 00 00 40 00 00 00",
+          "popup": "Dr Seat: Vent Med"
+        },
+        {
+          "label": "Vent Low (-1)",
+          "payload": "00 00 00 00 30 00 00 00",
+          "popup": "Dr Seat: Vent Low"
+        },
+        {
+          "label": "Off / Neutral (0)",
+          "payload": "00 00 00 00 20 00 00 00",
+          "popup": "Dr Seat: Off",
+          "default": true
+        },
+        {
+          "label": "Heat Low (+1)",
+          "payload": "00 00 00 00 60 00 00 00",
+          "popup": "Dr Seat: Heat Low"
+        },
+        {
+          "label": "Heat Med (+2)",
+          "payload": "00 00 00 00 70 00 00 00",
+          "popup": "Dr Seat: Heat Med"
+        },
+        {
+          "label": "Heat High (+3)",
+          "payload": "00 00 00 00 80 00 00 00",
+          "popup": "Dr Seat: Heat High"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 00 80 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Driver Seat Comfort",
+      "tags": ["seats", "driver_seat", "comfort", "heat", "ventilation"],
+      "roles": ["action"]
+    },
+    {
+      "id": "act_passenger_seat_comfort",
+      "name": "Passenger Seat Comfort Level",
+      "requires_feature": "heated_seats",
+      "type": "can_tx",
+      "state_can_id": "0x4A2",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Pass Seat: Comfort Set",
+      "options": [
+        {
+          "label": "Vent High (-3)",
+          "payload": "00 00 00 00 05 00 00 00",
+          "popup": "Pass Seat: Vent High"
+        },
+        {
+          "label": "Vent Med (-2)",
+          "payload": "00 00 00 00 04 00 00 00",
+          "popup": "Pass Seat: Vent Med"
+        },
+        {
+          "label": "Vent Low (-1)",
+          "payload": "00 00 00 00 03 00 00 00",
+          "popup": "Pass Seat: Vent Low"
+        },
+        {
+          "label": "Off / Neutral (0)",
+          "payload": "00 00 00 00 02 00 00 00",
+          "popup": "Pass Seat: Off",
+          "default": true
+        },
+        {
+          "label": "Heat Low (+1)",
+          "payload": "00 00 00 00 06 00 00 00",
+          "popup": "Pass Seat: Heat Low"
+        },
+        {
+          "label": "Heat Med (+2)",
+          "payload": "00 00 00 00 07 00 00 00",
+          "popup": "Pass Seat: Heat Med"
+        },
+        {
+          "label": "Heat High (+3)",
+          "payload": "00 00 00 00 08 00 00 00",
+          "popup": "Pass Seat: Heat High"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 00 08 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Passenger Seat Comfort",
+      "tags": ["seats", "passenger_seat", "comfort", "heat", "ventilation"],
+      "roles": ["action"]
+    },
+    {
+      "id": "act_both_seats_comfort",
+      "name": "Both Front Seats Comfort Level",
+      "requires_feature": "heated_seats",
+      "type": "can_tx",
+      "state_can_id": "0x4A2",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Seats: Comfort Set",
+      "options": [
+        {
+          "label": "Vent High (-3)",
+          "payload": "00 00 00 00 55 00 00 00",
+          "popup": "Seats: Vent High"
+        },
+        {
+          "label": "Vent Med (-2)",
+          "payload": "00 00 00 00 44 00 00 00",
+          "popup": "Seats: Vent Med"
+        },
+        {
+          "label": "Vent Low (-1)",
+          "payload": "00 00 00 00 33 00 00 00",
+          "popup": "Seats: Vent Low"
+        },
+        {
+          "label": "Off / Neutral (0)",
+          "payload": "00 00 00 00 22 00 00 00",
+          "popup": "Seats: Off",
+          "default": true
+        },
+        {
+          "label": "Heat Low (+1)",
+          "payload": "00 00 00 00 66 00 00 00",
+          "popup": "Seats: Heat Low"
+        },
+        {
+          "label": "Heat Med (+2)",
+          "payload": "00 00 00 00 77 00 00 00",
+          "popup": "Seats: Heat Med"
+        },
+        {
+          "label": "Heat High (+3)",
+          "payload": "00 00 00 00 88 00 00 00",
+          "popup": "Seats: Heat High"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 00 88 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Both Front Seats",
+      "tags": ["seats", "front_seats", "comfort", "heat", "ventilation"],
+      "roles": ["action"]
+    },
+    {
+      "id": "act_heated_steering_wheel_toggle",
+      "name": "Heated Steering Wheel Toggle",
+      "requires_feature": "heated_wheel",
+      "type": "can_tx",
+      "state_can_id": "0x418",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Heated Wheel Toggle",
+      "steps": [
+        {
+          "payload": "00 00 01 00 00 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Steering Wheel Comfort",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_remote_climate_start",
+      "name": "Remote Climate Start (+ Seats & Wheel)",
+      "type": "can_tx",
+      "state_can_id": "0x4A2",
+      "bus": 0,
+      "delay_ms": 50,
+      "popup_message": "Remote Climate Started",
+      "options": [
+        {
+          "label": "Start (+ Seats & Wheel)",
+          "payload": "00 00 FF F3 FF FF 7F 00",
+          "popup": "Climate + Warmers Started",
+          "default": true
+        },
+        {
+          "label": "Start (Climate Only)",
+          "payload": "00 00 FF 03 FF FF 00 00",
+          "popup": "Remote Climate Started"
+        },
+        {
+          "label": "Turn OFF / Cancel",
+          "payload": "00 00 00 00 00 00 00 00",
+          "popup": "Remote Climate Stopped"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 0F 03 00 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 FF F3 FF FF 7F 00",
+          "repeat": 30
+        }
+      ],
+      "category": "Cabin Climate Control",
+      "subcategory": "Remote Climate & Preconditioning",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_deep_sleep_network_wake_pulse",
+      "name": "Deep Sleep Network Wake Pulse",
+      "type": "can_tx",
+      "state_can_id": "0x604",
+      "bus": 0,
+      "delay_ms": 40,
+      "popup_message": "Vehicle Network Woken",
+      "options": [
+        {
+          "label": "Wake Pulse",
+          "payload": "4B 14 14 14 14 14 FF FF",
+          "default": true
+        }
+      ],
+      "steps": [
+        {
+          "payload": "4B 14 14 14 14 14 FF FF",
+          "repeat": 30
+        }
+      ],
+      "category": "Cabin Climate Control",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_set_target_cabin_temp",
+      "name": "Set Target Cabin Temp",
+      "type": "climate_target",
+      "climate_zone": "driver",
+      "target_temp_c": 21.0,
+      "target_temp_f": 70,
+      "pass_temp_c": 21.0,
+      "pass_temp_f": 70,
+      "climate_sync_on": true,
+      "climate_driver_only": false,
+      "popup_message": "Climate: 21°C",
+      "popup_message_imperial": "Climate: 70°F",
+      "category": "Cabin Climate Control",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_sync_mode_toggle",
+      "name": "SYNC Mode Toggle",
+      "type": "can_tx",
+      "state_can_id": "0x4A0",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Climate: SYNC ON",
+      "options": [
+        {
+          "label": "Turn ON",
+          "payload": "00 00 00 0F 00 00 00 00",
+          "popup": "Climate: SYNC ON",
+          "default": true
+        },
+        {
+          "label": "Turn OFF",
+          "payload": "00 00 00 07 00 00 00 00",
+          "popup": "Climate: SYNC OFF"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 0F 00 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Cabin Climate Control",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_driver_only_mode",
+      "name": "Driver Only Mode",
+      "type": "can_tx",
+      "state_can_id": "0x41D",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Driver Only: ON",
+      "options": [
+        {
+          "label": "Turn ON",
+          "payload": "00 00 00 00 0F 00 00 00",
+          "popup": "Driver Only: ON",
+          "default": true
+        },
+        {
+          "label": "Turn OFF",
+          "payload": "00 00 00 00 0C 00 00 00",
+          "popup": "Driver Only: OFF"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "00 00 00 00 0F 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Cabin Climate Control",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_active_sound_design_profile",
+      "name": "Active Sound Design (ASD) Profile",
+      "tags": ["kia_ev6"],
+      "requires_feature": "asd",
+      "type": "can_tx",
+      "state_can_id": "0x658",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "ASD: Dynamic",
+      "options": [
+        {
+          "label": "Off",
+          "payload": "7F 7F AF 00 00 00 00 00",
+          "popup": "ASD: Off"
+        },
+        {
+          "label": "Stylish",
+          "payload": "87 87 AF 00 00 00 00 00",
+          "popup": "ASD: Stylish"
+        },
+        {
+          "label": "Dynamic",
+          "payload": "8B 8B AF 00 00 00 00 00",
+          "popup": "ASD: Dynamic",
+          "default": true
+        },
+        {
+          "label": "Cyber",
+          "payload": "8F 8F AF 00 00 00 00 00",
+          "popup": "ASD: Cyber"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "8B 8B AF 00 00 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Vehicle Actuators & Features",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_360_surround_view_camera",
+      "name": "360° Surround View Camera",
+      "requires_feature": "camera_360",
+      "type": "can_tx",
+      "state_can_id": "0x476",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Camera View",
+      "steps": [
+        {
+          "payload": "00 00 52 00 00 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Vehicle Actuators & Features",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_keepalive_wakeup_ping",
+      "name": "Keepalive / Wakeup Ping",
+      "type": "can_tx",
+      "state_can_id": "0x7DF",
+      "bus": 0,
+      "delay_ms": 10,
+      "popup_message": "Keepalive Ping",
+      "steps": [
+        {
+          "payload": "02 01 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Vehicle Actuators & Features",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_multi_frame_burst_sequence",
+      "name": "Multi-Frame Burst Sequence (x3)",
+      "type": "can_tx",
+      "state_can_id": "0x652",
+      "bus": 0,
+      "delay_ms": 20,
+      "steps": [
+        {
+          "payload": "00 00 01 00 00 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 00 00 00 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Vehicle Actuators & Features",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_home_assistant_webhook_event",
+      "name": "Home Assistant Webhook Event",
+      "type": "webhook",
+      "webhook_url": "http://homeassistant.local:8123/api/webhook/wican_event",
+      "category": "Home Assistant & Cloud",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_mqtt_json_event_alert",
+      "name": "MQTT JSON Event Alert",
+      "type": "mqtt",
+      "mqtt_topic": "wican/event/alert",
+      "mqtt_payload": "{\"event\": \"triggered\", \"status\": \"active\"}",
+      "category": "Home Assistant & Cloud",
+      "roles": ["action"]
+    },
+    {
+      "id": "act_interior_ambient_mood_lighting",
+      "name": "Interior Ambient Mood Lighting",
+      "type": "can_tx",
+      "state_can_id": "0x4AD",
+      "bus": 0,
+      "delay_ms": 20,
+      "popup_message": "Ambient Light: {option}",
+      "options": [
+        {
+          "label": "Electric Blue",
+          "payload": "00 54 F1 0F 00 00 00 00",
+          "popup": "Ambient: Electric Blue"
+        },
+        {
+          "label": "Cyan / Aqua Wave",
+          "payload": "00 64 53 0F 00 00 00 00",
+          "popup": "Ambient: Cyan / Aqua"
+        },
+        {
+          "label": "Deep Purple / Violet",
+          "payload": "80 00 F0 0F 00 00 00 00",
+          "popup": "Ambient: Violet",
+          "default": true
+        },
+        {
+          "label": "Magenta / Neon Pink",
+          "payload": "FF 00 10 0F 00 00 00 00",
+          "popup": "Ambient: Magenta"
+        },
+        {
+          "label": "Crimson Red",
+          "payload": "FE 88 00 00 00 00 00 00",
+          "popup": "Ambient: Crimson Red"
+        },
+        {
+          "label": "Warm Sunset / Amber",
+          "payload": "FF 50 72 07 00 00 00 00",
+          "popup": "Ambient: Sunset Orange"
+        },
+        {
+          "label": "Lime / Mint Glow",
+          "payload": "F7 FC 63 0B 00 00 00 00",
+          "popup": "Ambient: Mint / Lime"
+        },
+        {
+          "label": "Warm White / Champagne",
+          "payload": "FE B4 53 0A 00 00 00 00",
+          "popup": "Ambient: Champagne"
+        }
+      ],
+      "steps": [
+        {
+          "payload": "80 00 F0 0F 00 00 00 00",
+          "repeat": 3
+        },
+        {
+          "payload": "00 02 08 20 00 00 00 00",
+          "repeat": 3
+        }
+      ],
+      "category": "Ambient & Interior Lighting",
+      "roles": ["action"]
+    },
+    {
+      "id": "cond_speed_zero",
+      "name": "Vehicle Stopped / Parked (Speed == 0)",
+      "type": "speed_zero",
+      "category": "Vehicle State & Safety",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_gear_park",
+      "name": "Gear in PARK (P)",
+      "type": "can_state",
+      "state_can_id": "0x2C0",
+      "match_payload": "* * 00 * * * * *",
+      "category": "Vehicle State & Safety",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_doors_closed",
+      "name": "All Doors & Trunk Closed",
+      "type": "can_state",
+      "state_can_id": "0x540",
+      "match_payload": "00 00 00 00 * * * *",
+      "category": "Vehicle State & Safety",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_driver_seat_heat",
+      "name": "Driver Seat Heat is Active",
+      "type": "can_state",
+      "state_can_id": "0x496",
+      "match_payload": "!12 * * * * * * *",
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Driver Seat Comfort",
+      "tags": ["seats", "driver_seat", "heat"],
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_pass_seat_heat",
+      "name": "Passenger Seat Heat is Active",
+      "type": "can_state",
+      "state_can_id": "0x475",
+      "match_payload": "!12 * * * * * * *",
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Passenger Seat Comfort",
+      "tags": ["seats", "passenger_seat", "heat"],
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_climate_off",
+      "name": "Climate / HVAC is OFF",
+      "type": "can_state",
+      "state_can_id": "0x476",
+      "match_payload": "* 00 * * * * * *",
+      "category": "Vehicle State & Safety",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_charging",
+      "name": "Vehicle Plugged In / EV Charging",
+      "type": "can_state",
+      "state_can_id": "0x594",
+      "match_payload": "* * 01 * * * * *",
+      "category": "Vehicle State & Safety",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_temp_freezing",
+      "name": "Outdoor Temp <= 0°C (32°F Freezing)",
+      "type": "param_range",
+      "expression": "[B3] <= 40",
+      "state_can_id": "0x226",
+      "category": "Environment & Weather",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_temp_cold",
+      "name": "Outdoor Temp < 15°C (59°F Cold)",
+      "type": "param_range",
+      "expression": "[B3] < 55",
+      "state_can_id": "0x226",
+      "category": "Environment & Weather",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_temp_warm",
+      "name": "Outdoor Temp > 25°C (77°F Warm)",
+      "type": "param_range",
+      "expression": "[B3] > 65",
+      "state_can_id": "0x226",
+      "category": "Environment & Weather",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_hv_soc_ok",
+      "name": "HV Battery SOC > 20% (Safe for Precon)",
+      "type": "param_range",
+      "expression": "[B7] >= 40",
+      "state_can_id": "0x2FC",
+      "category": "Battery & Power",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_hv_soc_high",
+      "name": "HV Battery SOC > 50%",
+      "type": "param_range",
+      "expression": "[B7] >= 100",
+      "state_can_id": "0x2FC",
+      "category": "Battery & Power",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_hv_soc_low",
+      "name": "HV Battery SOC < 20% (Low Battery)",
+      "type": "param_range",
+      "expression": "[B7] < 40",
+      "state_can_id": "0x2FC",
+      "category": "Battery & Power",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_aux_12v_healthy",
+      "name": "12V Aux Battery Healthy (> 12.4V)",
+      "type": "voltage",
+      "voltage_val": "12.4",
+      "voltage_dir": "above",
+      "category": "Battery & Power",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_aux_12v_low",
+      "name": "12V Aux Battery Low (< 12.0V)",
+      "type": "voltage",
+      "voltage_val": "12.0",
+      "voltage_dir": "below",
+      "category": "Battery & Power",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_weekdays",
+      "name": "Weekdays Only (Monday – Friday)",
+      "type": "day_of_week",
+      "days": ["mon", "tue", "wed", "thu", "fri"],
+      "category": "Schedule & Calendar",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_weekends",
+      "name": "Weekends Only (Saturday – Sunday)",
+      "type": "day_of_week",
+      "days": ["sat", "sun"],
+      "category": "Schedule & Calendar",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_daytime",
+      "name": "Daytime Hours (07:00 – 19:00)",
+      "type": "time_window",
+      "start_time": "07:00",
+      "end_time": "19:00",
+      "category": "Schedule & Calendar",
+      "roles": ["condition"]
+    },
+    {
+      "id": "cond_nighttime",
+      "name": "Nighttime / Overnight (19:00 – 07:00)",
+      "type": "time_window",
+      "start_time": "19:00",
+      "end_time": "07:00",
+      "category": "Schedule & Calendar",
+      "roles": ["condition"]
+    }
+  ]
+};

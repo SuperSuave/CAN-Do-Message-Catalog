@@ -427,7 +427,9 @@
       "to_payload": "* * * * * 1*",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
     },
     {
       "id": "sw_mode",
@@ -442,7 +444,9 @@
       "to_payload": "* * 4*",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
     },
     {
       "id": "sw_speak",
@@ -457,7 +461,9 @@
       "to_payload": "* * *1",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
     },
     {
       "id": "sw_call",
@@ -472,7 +478,9 @@
       "to_payload": "* * *4",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
     },
     {
       "id": "sw_volume",
@@ -508,7 +516,9 @@
           "from_payload": "* * * * *0",
           "to_payload": "* * * * *4"
         }
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
     },
     {
       "id": "sw_seek",
@@ -539,7 +549,9 @@
           "from_payload": "* * * *0",
           "to_payload": "* * * *4"
         }
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
     },
     {
       "id": "sw_menu",
@@ -575,7 +587,288 @@
           "to_payload": "* * * * * * 1*",
           "default": true
         }
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
+    },
+    {
+      "id": "steering_paddles",
+      "name": "Regenerative Braking Paddles",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Steering Wheel",
+      "state_can_id": "0x1CF",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Regen braking paddles decoded from CAN-FD frame 463 (0x1CF)"
+      },
+      "options": [
+        {
+          "label": "Left Paddle Pulled",
+          "from_payload": "* * * 0* * * *",
+          "to_payload": "* * * 8* * * *",
+          "match_payload": "* * * 8* * * *",
+          "default": true
+        },
+        {
+          "label": "Right Paddle Pulled",
+          "from_payload": "* * * 0* * * *",
+          "to_payload": "* * * 2* * * *",
+          "match_payload": "* * * 2* * * *"
+        }
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
+    },
+    {
+      "id": "sw_cruise_cluster",
+      "name": "Steering Wheel Cruise & ADAS Controls",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Steering Wheel",
+      "state_can_id": "0x1CF",
+      "bus": 0,
+      "roles": [
+        "trigger"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from CAN-FD frame 463 (0x1CF)"
+      },
+      "options": [
+        {
+          "label": "Adaptive Cruise Main Button",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 8* * * * *",
+          "default": true
+        },
+        {
+          "label": "Lane Following Assist (LDA) Button",
+          "from_payload": "* * * 0* * * *",
+          "to_payload": "* * * 8* * * *"
+        },
+        {
+          "label": "Distance Gap Cycle Button",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 3* * * * *"
+        },
+        {
+          "label": "Resume / Accel Toggle (+)",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 1* * * * *"
+        },
+        {
+          "label": "Set / Decel Toggle (-)",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 2* * * * *"
+        }
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:steering"
+    },
+    {
+      "id": "blinker_stalks",
+      "name": "Headlight & Turn Signal Stalk",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Steering Wheel",
+      "state_can_id": "0x3C1",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from CAN-FD frame 961 (0x3C1)"
+      },
+      "options": [
+        {
+          "label": "High Beam Flash (Pull)",
+          "from_payload": "* * * 0* * * *",
+          "to_payload": "* * * 4* * * *",
+          "match_payload": "* * * 4* * * *",
+          "default": true
+        },
+        {
+          "label": "High Beam On (Push)",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 4* * * * *",
+          "match_payload": "* * 4* * * * *"
+        },
+        {
+          "label": "Left Turn Stalk Engaged",
+          "from_payload": "* * * * 0* * *",
+          "to_payload": "* * * * 4* * *",
+          "match_payload": "* * * * 4* * *"
+        },
+        {
+          "label": "Right Turn Stalk Engaged",
+          "from_payload": "* * * * 0* * *",
+          "to_payload": "* * * * 1* * *",
+          "match_payload": "* * * * 1* * *"
+        }
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:car-light-dimmed"
+    },
+    {
+      "id": "steering_wheel_touch",
+      "name": "Steering Wheel Hands-On Touch (HOD)",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Steering Wheel",
+      "state_can_id": "0x2AF",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Capacitive rim sensor decoded from CAN-FD frame 687 (0x2AF)"
+      },
+      "options": [
+        {
+          "label": "Hands Off Rim",
+          "match_payload": "* * 0* * * * *",
+          "from_payload": "* * * * * * *",
+          "to_payload": "* * 0* * * * *",
+          "default": true
+        },
+        {
+          "label": "Hands Touching Rim",
+          "match_payload": "* * 1* * * * *",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 1* * * * *"
+        },
+        {
+          "label": "Hands Gripping Rim",
+          "match_payload": "* * 3* * * * *",
+          "from_payload": "* * * * * * *",
+          "to_payload": "* * 3* * * * *"
+        }
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:steering"
+    },
+    {
+      "id": "gear_shifter_dial",
+      "name": "Rotary Gear Shifter Dial & Park Switch",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Dashboard / Center Console",
+      "state_can_id": "0x130",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from CAN-FD frame 304 (0x130)"
+      },
+      "options": [
+        {
+          "label": "Park Button Pressed",
+          "from_payload": "* * * * 0* * *",
+          "to_payload": "* * * * 1* * *",
+          "match_payload": "* * * * 1* * *",
+          "default": true
+        },
+        {
+          "label": "Knob Turned to Drive (D)",
+          "from_payload": "* * * * * 0* *",
+          "to_payload": "* * * * * 5* *",
+          "match_payload": "* * * * * 5* *"
+        },
+        {
+          "label": "Knob Turned to Reverse (R)",
+          "from_payload": "* * * * * 0* *",
+          "to_payload": "* * * * * 1* *",
+          "match_payload": "* * * * * 1* *"
+        }
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:car-shift-pattern"
+    },
+    {
+      "id": "hvac_touch_buttons",
+      "name": "HVAC Touch Strip Buttons",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Dashboard / Center Console",
+      "state_can_id": "0x47F",
+      "bus": 0,
+      "roles": [
+        "trigger"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from CAN-FD frame 1151 (0x47F)"
+      },
+      "options": [
+        {
+          "label": "Auto Button",
+          "from_payload": "* 0* * * * * *",
+          "to_payload": "* 8* * * * * *",
+          "default": true
+        },
+        {
+          "label": "Sync Button",
+          "from_payload": "* *0 * * * * *",
+          "to_payload": "* *8 * * * * *"
+        },
+        {
+          "label": "Front Defrost Button",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 1* * * * *"
+        },
+        {
+          "label": "Rear Defrost Button",
+          "from_payload": "* * 0* * * * *",
+          "to_payload": "* * 4* * * * *"
+        },
+        {
+          "label": "Driver Only Button",
+          "from_payload": "* * * * * 0* *",
+          "to_payload": "* * * * * 1* *"
+        },
+        {
+          "label": "Heat Button",
+          "from_payload": "* * * * * * 0*",
+          "to_payload": "* * * * * * 1*"
+        },
+        {
+          "label": "AC Button",
+          "from_payload": "* * * * * 0* *",
+          "to_payload": "* * * * * 8* *"
+        },
+        {
+          "label": "Recirculation Button",
+          "from_payload": "* * * * * * 0*",
+          "to_payload": "* * * * * * 8*"
+        }
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:thermostat"
     },
     {
       "id": "avn_star",
@@ -590,7 +883,9 @@
       "to_payload": "* *4",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:car-info"
     },
     {
       "id": "ev6_mode_strip",
@@ -606,7 +901,9 @@
       "to_payload": "* * * 5*",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:car-info"
     },
     {
       "id": "camera_btn",
@@ -622,7 +919,9 @@
       "to_payload": "* * 52",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:cctv"
     },
     {
       "id": "cluster_brightness",
@@ -648,7 +947,9 @@
           "from_payload": "* * * * * * * 0A",
           "to_payload": "* * * * * * * 8A"
         }
-      ]
+      ],
+      "ha_domain": "event",
+      "icon": "mdi:car-info"
     },
     {
       "id": "heated_wheel_btn",
@@ -664,37 +965,9 @@
       "to_payload": "* * 01",
       "roles": [
         "trigger"
-      ]
-    },
-    {
-      "id": "climate_sync_toggle",
-      "name": "Climate SYNC Button Toggle",
-      "tags": [
-        "all_egmp"
       ],
-      "category": "Comfort & Climate",
-      "state_can_id": "0x4A0",
-      "bus": 0,
-      "from_payload": "* * * 0B",
-      "to_payload": "* * * 0F",
-      "roles": [
-        "trigger"
-      ]
-    },
-    {
-      "id": "climate_driver_only",
-      "name": "Driver Only / Heat Mode Toggle",
-      "tags": [
-        "all_egmp"
-      ],
-      "category": "Comfort & Climate",
-      "state_can_id": "0x41D",
-      "bus": 0,
-      "from_payload": "* * * * 0D",
-      "to_payload": "* * * * 0F",
-      "roles": [
-        "trigger"
-      ]
+      "ha_domain": "sensor",
+      "icon": "mdi:steering-wheel"
     },
     {
       "id": "climate_rear_defog",
@@ -709,7 +982,9 @@
       "to_payload": "* * * * 1*",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:thermostat"
     },
     {
       "id": "climate_temp_status",
@@ -724,7 +999,9 @@
       "to_payload": "",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "sensor",
+      "icon": "mdi:thermostat"
     },
     {
       "id": "climate_fan_active",
@@ -739,7 +1016,9 @@
       "to_payload": "* * * 2*",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:thermostat"
     },
     {
       "id": "climate_recirc_on",
@@ -754,7 +1033,45 @@
       "to_payload": "* * * * 4*",
       "roles": [
         "trigger"
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:thermostat"
+    },
+    {
+      "id": "remote_climate_state",
+      "name": "Remote Climate Execution State",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Comfort & Climate",
+      "state_can_id": "0x384",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP frame 900 (0x384) byte 3"
+      },
+      "options": [
+        {
+          "label": "Remote Climate Active",
+          "match_payload": "* * * 0A * * * *",
+          "from_payload": "* * * 00 * * * *",
+          "to_payload": "* * * 0A * * * *",
+          "default": true
+        },
+        {
+          "label": "Remote Climate Off",
+          "match_payload": "* * * 00 * * * *",
+          "from_payload": "* * * 0A * * * *",
+          "to_payload": "* * * 00 * * * *"
+        }
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:radiator"
     },
     {
       "id": "car_ready_state",
@@ -765,11 +1082,27 @@
       "category": "Vehicle State & Safety",
       "state_can_id": "0x038",
       "bus": 0,
-      "from_payload": "*0",
-      "to_payload": "*4",
       "roles": [
-        "trigger"
-      ]
+        "trigger",
+        "condition"
+      ],
+      "options": [
+        {
+          "label": "Vehicle Ready",
+          "match_payload": "04 * * * * * * *",
+          "from_payload": "01 * * * * * * *",
+          "to_payload": "04 * * * * * * *",
+          "default": true
+        },
+        {
+          "label": "Vehicle Awake Not Ready",
+          "match_payload": "01 * * * * * * *",
+          "from_payload": "04 * * * * * * *",
+          "to_payload": "01 * * * * * * *"
+        }
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:power"
     },
     {
       "id": "doors_status",
@@ -778,7 +1111,7 @@
         "all_egmp"
       ],
       "category": "Vehicle State & Safety",
-      "state_can_id": "0x521",
+      "state_can_id": "0x411",
       "bus": 0,
       "roles": [
         "trigger",
@@ -787,35 +1120,146 @@
       "contributor": {
         "name": "Electroniq Buttons Community",
         "github": "",
-        "notes": "Consolidated door open and closed states"
+        "notes": "Decoded from E-GMP Body_Status frame 1041 (0x411)"
       },
       "options": [
         {
           "label": "Driver Door Opened",
-          "from_payload": "00",
-          "to_payload": "01",
           "match_payload": "* * * 01 * * * *",
+          "from_payload": "* * * 00 * * * *",
+          "to_payload": "* * * 01 * * * *",
           "default": true
         },
         {
           "label": "Driver Door Closed",
-          "from_payload": "01",
-          "to_payload": "00",
-          "match_payload": "* * * 00 * * * *"
+          "match_payload": "* * * 00 * * * *",
+          "from_payload": "* * * 01 * * * *",
+          "to_payload": "* * * 00 * * * *"
         },
         {
           "label": "Passenger Door Opened",
-          "from_payload": "*0",
-          "to_payload": "*4",
-          "match_payload": "* * * *4 * * *"
+          "match_payload": "* * * * 04 * * *",
+          "from_payload": "* * * * 00 * * *",
+          "to_payload": "* * * * 04 * * *"
         },
         {
           "label": "Passenger Door Closed",
-          "from_payload": "*4",
-          "to_payload": "*0",
-          "match_payload": "* * * *0 * * *"
+          "match_payload": "* * * * 00 * * *",
+          "from_payload": "* * * * 04 * * *",
+          "to_payload": "* * * * 00 * * *"
+        },
+        {
+          "label": "Rear Left Door Opened",
+          "match_payload": "* * * * * * 10 *",
+          "from_payload": "* * * * * * 00 *",
+          "to_payload": "* * * * * * 10 *"
+        },
+        {
+          "label": "Rear Left Door Closed",
+          "match_payload": "* * * * * * 00 *",
+          "from_payload": "* * * * * * 10 *",
+          "to_payload": "* * * * * * 00 *"
+        },
+        {
+          "label": "Rear Right Door Opened",
+          "match_payload": "* * * * * * * 01",
+          "from_payload": "* * * * * * * 00",
+          "to_payload": "* * * * * * * 01"
+        },
+        {
+          "label": "Rear Right Door Closed",
+          "match_payload": "* * * * * * * 00",
+          "from_payload": "* * * * * * * 01",
+          "to_payload": "* * * * * * * 00"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-door",
+      "device_class": "door"
+    },
+    {
+      "id": "doors_lock_state",
+      "name": "Door Locks",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x411",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP Body_Status frame 1041 (0x411) bit 22"
+      },
+      "options": [
+        {
+          "label": "Unlocked / Unlock",
+          "match_payload": "* * 40 * * * * *",
+          "from_payload": "* * 00 * * * * *",
+          "to_payload": "* * 40 * * * * *",
+          "default": true
+        },
+        {
+          "label": "Locked / Lock",
+          "match_payload": "* * 00 * * * * *",
+          "from_payload": "* * 40 * * * * *",
+          "to_payload": "* * 00 * * * * *"
+        }
+      ],
+      "ha_domain": "lock",
+      "icon": "mdi:car-door"
+    },
+    {
+      "id": "seatbelts_status",
+      "name": "Seatbelts",
+      "tags": [
+        "all_egmp"
+      ],
+      "category": "Vehicle State & Safety",
+      "state_can_id": "0x411",
+      "bus": 0,
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP Body_Status frame 1041 (0x411) bits 36 and 42"
+      },
+      "options": [
+        {
+          "label": "Driver Buckled",
+          "match_payload": "* * * * * 04 * *",
+          "from_payload": "* * * * * 00 * *",
+          "to_payload": "* * * * * 04 * *",
+          "default": true
+        },
+        {
+          "label": "Driver Unbuckled",
+          "match_payload": "* * * * * 00 * *",
+          "from_payload": "* * * * * 04 * *",
+          "to_payload": "* * * * * 00 * *"
+        },
+        {
+          "label": "Passenger Buckled",
+          "match_payload": "* * * * 10 * * *",
+          "from_payload": "* * * * 00 * * *",
+          "to_payload": "* * * * 10 * * *"
+        },
+        {
+          "label": "Passenger Unbuckled",
+          "match_payload": "* * * * 00 * * *",
+          "from_payload": "* * * * 10 * * *",
+          "to_payload": "* * * * 00 * * *"
+        }
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:seatbelt"
     },
     {
       "id": "trunk",
@@ -833,18 +1277,21 @@
       "options": [
         {
           "label": "Opened / Open",
-          "from_payload": "* * * 00",
-          "to_payload": "* * * 01",
-          "match_payload": "* * * 01 * * *",
+          "from_payload": "* * * 00 * * * *",
+          "to_payload": "* * * 01 * * * *",
+          "match_payload": "* * * 01 * * * *",
           "default": true
         },
         {
           "label": "Closed / Shut",
-          "from_payload": "* * * 01",
-          "to_payload": "* * * 00",
-          "match_payload": "* * * 00 * * *"
+          "from_payload": "* * * 01 * * * *",
+          "to_payload": "* * * 00 * * * *",
+          "match_payload": "* * * 00 * * * *"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-back",
+      "device_class": "door"
     },
     {
       "id": "charge_port",
@@ -862,18 +1309,21 @@
       "options": [
         {
           "label": "Opened / Open",
-          "from_payload": "* * * * 00",
-          "to_payload": "* * * * 02",
+          "from_payload": "* * * * 00 * * *",
+          "to_payload": "* * * * 02 * * *",
           "match_payload": "* * * * 02 * * *",
           "default": true
         },
         {
           "label": "Closed / Shut",
-          "from_payload": "* * * * 02",
-          "to_payload": "* * * * 00",
+          "from_payload": "* * * * 02 * * *",
+          "to_payload": "* * * * 00 * * *",
           "match_payload": "* * * * 00 * * *"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:ev-plug-type2",
+      "device_class": "door"
     },
     {
       "id": "hood",
@@ -882,57 +1332,90 @@
         "all_egmp"
       ],
       "category": "Vehicle State & Safety",
-      "state_can_id": "0x541",
+      "state_can_id": "0x411",
       "bus": 0,
       "roles": [
         "trigger",
         "condition"
       ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP Body_Status frame 1041 (0x411) bit 44"
+      },
       "options": [
         {
           "label": "Opened / Open",
-          "from_payload": "* * 0*",
-          "to_payload": "* * 2*",
-          "match_payload": "* * 2* * * * * *",
+          "from_payload": "* * * * * 00 * *",
+          "to_payload": "* * * * * 10 * *",
+          "match_payload": "* * * * * 10 * *",
           "default": true
         },
         {
           "label": "Closed / Shut",
-          "from_payload": "* * 2*",
-          "to_payload": "* * 0*",
-          "match_payload": "* * 0* * * * * *"
+          "from_payload": "* * * * * 10 * *",
+          "to_payload": "* * * * * 00 * *",
+          "match_payload": "* * * * * 00 * *"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-front",
+      "device_class": "door"
     },
     {
-      "id": "sunroof",
-      "name": "Sunroof",
+      "id": "sunroof_extended",
+      "name": "Sunroof Glass & Cover",
       "tags": [
         "all_egmp"
       ],
       "requires_feature": "sunroof",
       "category": "Vehicle State & Safety",
-      "state_can_id": "0x541",
+      "state_can_id": "0x442",
       "bus": 0,
       "roles": [
         "trigger",
         "condition"
       ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP Sunroof_Status frame 1090 (0x442) bytes 6 and 7"
+      },
       "options": [
         {
-          "label": "Opened / Tilt",
-          "from_payload": "* * * * * * * 0*",
-          "to_payload": "* * * * * * * 2*",
-          "match_payload": "* * * * * * * 2*",
+          "label": "Glass Opened",
+          "match_payload": "* * * * * * 60 *",
+          "from_payload": "* * * * * * 10 *",
+          "to_payload": "* * * * * * 60 *",
           "default": true
         },
         {
-          "label": "Closed / Shut",
-          "from_payload": "* * * * * * * 2*",
-          "to_payload": "* * * * * * * 0*",
-          "match_payload": "* * * * * * * 0*"
+          "label": "Glass Tilted / Windbreak",
+          "match_payload": "* * * * * * 00 *",
+          "from_payload": "* * * * * * 10 *",
+          "to_payload": "* * * * * * 00 *"
+        },
+        {
+          "label": "Glass Closed",
+          "match_payload": "* * * * * * 10 *",
+          "from_payload": "* * * * * * !10 *",
+          "to_payload": "* * * * * * 10 *"
+        },
+        {
+          "label": "Cover Opened",
+          "match_payload": "* * * * * * * 60",
+          "from_payload": "* * * * * * * 30",
+          "to_payload": "* * * * * * * 60"
+        },
+        {
+          "label": "Cover Closed",
+          "match_payload": "* * * * * * * 30",
+          "from_payload": "* * * * * * * 60",
+          "to_payload": "* * * * * * * 30"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:window-open"
     },
     {
       "id": "hazard_lights",
@@ -961,7 +1444,9 @@
           "to_payload": "* * * * 0*",
           "match_payload": "* * * * 0* * * *"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-light-dimmed"
     },
     {
       "id": "wipers",
@@ -990,11 +1475,13 @@
           "to_payload": "* * * 0*",
           "match_payload": "* * * 0* * * * *"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:wiper"
     },
     {
-      "id": "brake_pedal",
-      "name": "Brake Pedal",
+      "id": "brake_pedal_state",
+      "name": "Brake Pedal Switch & Application",
       "tags": [
         "all_egmp"
       ],
@@ -1005,21 +1492,28 @@
         "trigger",
         "condition"
       ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP Brake_Pedal_Status frame 1042 (0x412) byte 6"
+      },
       "options": [
         {
-          "label": "Pressed / Down",
-          "from_payload": "* * * * * * 00",
-          "to_payload": "* * * * * * 04",
+          "label": "Brake Pressed",
           "match_payload": "* * * * * * 04 *",
+          "from_payload": "* * * * * * 00 *",
+          "to_payload": "* * * * * * 04 *",
           "default": true
         },
         {
-          "label": "Released / Up",
-          "from_payload": "* * * * * * 04",
-          "to_payload": "* * * * * * 00",
-          "match_payload": "* * * * * * 00 *"
+          "label": "Brake Released",
+          "match_payload": "* * * * * * 00 *",
+          "from_payload": "* * * * * * 04 *",
+          "to_payload": "* * * * * * 00 *"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-brake-alert"
     },
     {
       "id": "power_state",
@@ -1034,6 +1528,11 @@
         "trigger",
         "condition"
       ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP Power_CAN_Status frame 1077 (0x435) byte 7"
+      },
       "options": [
         {
           "label": "Ignition ON / Ready",
@@ -1048,45 +1547,18 @@
           "to_payload": "* * * * * * * FF",
           "match_payload": "* * * * * * * FF"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:power"
     },
     {
-      "id": "doors_lock_state",
-      "name": "Door Locks",
+      "id": "drive_mode_state",
+      "name": "Vehicle Drive Mode",
       "tags": [
         "all_egmp"
       ],
       "category": "Vehicle State & Safety",
-      "state_can_id": "0x411",
-      "bus": 0,
-      "roles": [
-        "trigger",
-        "condition"
-      ],
-      "options": [
-        {
-          "label": "Unlocked / Unlock",
-          "from_payload": "* * 0*",
-          "to_payload": "* * 4*",
-          "match_payload": "* * 4* * * * * *",
-          "default": true
-        },
-        {
-          "label": "Locked / Lock",
-          "from_payload": "* * 4*",
-          "to_payload": "* * 0*",
-          "match_payload": "* * 0* * * * * *"
-        }
-      ]
-    },
-    {
-      "id": "seatbelts_status",
-      "name": "Seatbelts",
-      "tags": [
-        "all_egmp"
-      ],
-      "category": "Vehicle State & Safety",
-      "state_can_id": "0x411",
+      "state_can_id": "0x478",
       "bus": 0,
       "roles": [
         "trigger",
@@ -1095,35 +1567,31 @@
       "contributor": {
         "name": "Electroniq Buttons Community",
         "github": "",
-        "notes": "Consolidated driver and passenger seatbelt sensors"
+        "notes": "Decoded from CAN-FD frame 1144 (0x478) signal DRIVE_MODE2"
       },
       "options": [
         {
-          "label": "Driver Buckled",
-          "from_payload": "* * * * * 0*",
-          "to_payload": "* * * * * 4*",
-          "match_payload": "* * * * * 04 * *",
+          "label": "Eco Mode",
+          "match_payload": "* * * 2* * * *",
+          "from_payload": "* * * * * * *",
+          "to_payload": "* * * 2* * * *",
           "default": true
         },
         {
-          "label": "Driver Unbuckled",
-          "from_payload": "* * * * * 4*",
-          "to_payload": "* * * * * 0*",
-          "match_payload": "* * * * * 00 * *"
+          "label": "Normal Mode",
+          "match_payload": "* * * 1* * * *",
+          "from_payload": "* * * * * * *",
+          "to_payload": "* * * 1* * * *"
         },
         {
-          "label": "Passenger Buckled",
-          "from_payload": "* * * * 0*",
-          "to_payload": "* * * * 1*",
-          "match_payload": "* * * * 01 * * *"
-        },
-        {
-          "label": "Passenger Unbuckled",
-          "from_payload": "* * * * 1*",
-          "to_payload": "* * * * 0*",
-          "match_payload": "* * * * 00 * * *"
+          "label": "Sport Mode",
+          "match_payload": "* * * 3* * * *",
+          "from_payload": "* * * * * * *",
+          "to_payload": "* * * 3* * * *"
         }
-      ]
+      ],
+      "ha_domain": "sensor",
+      "icon": "mdi:car-info"
     },
     {
       "id": "drivers_seat_comfort",
@@ -1135,8 +1603,8 @@
         "condition",
         "action"
       ],
+      "action_can_id": "0x4A2",
       "state_can_id": "0x496",
-      "action_can_id": "0x4a2",
       "bus": 0,
       "type": "can_tx",
       "delay_ms": 20,
@@ -1269,7 +1737,9 @@
             }
           ]
         }
-      ]
+      ],
+      "ha_domain": "select",
+      "icon": "mdi:car-info"
     },
     {
       "id": "passengers_seat_comfort",
@@ -1281,8 +1751,8 @@
         "condition",
         "action"
       ],
+      "action_can_id": "0x4A2",
       "state_can_id": "0x475",
-      "action_can_id": "0x4a2",
       "bus": 0,
       "type": "can_tx",
       "delay_ms": 20,
@@ -1415,7 +1885,46 @@
             }
           ]
         }
-      ]
+      ],
+      "ha_domain": "select",
+      "icon": "mdi:car-info"
+    },
+    {
+      "id": "rear_seats_comfort",
+      "name": "Rear Seats Heated State",
+      "category": "Seats & Steering Wheel Comfort",
+      "subcategory": "Seat Comfort",
+      "roles": [
+        "trigger",
+        "condition"
+      ],
+      "state_can_id": "0x438",
+      "bus": 0,
+      "tags": [
+        "all_egmp"
+      ],
+      "contributor": {
+        "name": "Electroniq Buttons Community",
+        "github": "",
+        "notes": "Decoded from E-GMP RearLeft_Seat_Heating frame 1080 (0x438) and 1107 (0x453)"
+      },
+      "options": [
+        {
+          "label": "Rear Left High",
+          "match_payload": "41 * * * * * * *",
+          "default": true
+        },
+        {
+          "label": "Rear Left Low",
+          "match_payload": "31 * * * * * * *"
+        },
+        {
+          "label": "Rear Left Off",
+          "match_payload": "11 * * * * * * *"
+        }
+      ],
+      "ha_domain": "sensor",
+      "icon": "mdi:car-seat-heater"
     },
     {
       "id": "heated_steering_wheel_toggle",
@@ -1426,6 +1935,7 @@
       "requires_feature": "heated_wheel",
       "type": "can_tx",
       "action_can_id": "0x418",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 20,
       "popup_message": "Heated Wheel Toggle",
@@ -1442,7 +1952,9 @@
       "category": "Seats & Steering Wheel Comfort",
       "roles": [
         "action"
-      ]
+      ],
+      "ha_domain": "switch",
+      "icon": "mdi:car-info"
     },
     {
       "id": "battery_preconditioning",
@@ -1482,7 +1994,10 @@
           "precon_mode": "cancel",
           "precon_press": "short"
         }
-      ]
+      ],
+      "state_can_id": null,
+      "ha_domain": "select",
+      "icon": "mdi:car-battery"
     },
     {
       "id": "cluster_telemetry_popup",
@@ -1525,7 +2040,10 @@
           "label": "Sport Mode Active Toast",
           "popup_message": "SPORT MODE ACTIVE"
         }
-      ]
+      ],
+      "state_can_id": null,
+      "ha_domain": "button",
+      "icon": "mdi:car-info"
     },
     {
       "id": "ev_charge_limits",
@@ -1535,6 +2053,7 @@
       ],
       "type": "can_tx",
       "action_can_id": "0x4C5",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 20,
       "category": "EV Charging Limits",
@@ -1800,7 +2319,9 @@
             }
           ]
         }
-      ]
+      ],
+      "ha_domain": "select",
+      "icon": "mdi:ev-station"
     },
     {
       "id": "remote_climate_start____seats___wheel_",
@@ -1810,6 +2331,7 @@
       ],
       "type": "can_tx",
       "action_can_id": "0x4A2",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 50,
       "popup_message": "Remote Climate Started",
@@ -1844,7 +2366,9 @@
       "category": "Cabin Climate Control",
       "roles": [
         "action"
-      ]
+      ],
+      "ha_domain": "button",
+      "icon": "mdi:car-seat-heater"
     },
     {
       "id": "deep_sleep_network_wake_pulse",
@@ -1854,6 +2378,7 @@
       ],
       "type": "can_tx",
       "action_can_id": "0x604",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 40,
       "popup_message": "Vehicle Network Woken",
@@ -1873,7 +2398,9 @@
       "category": "Cabin Climate Control",
       "roles": [
         "action"
-      ]
+      ],
+      "ha_domain": "button",
+      "icon": "mdi:thermostat"
     },
     {
       "id": "set_target_cabin_temp",
@@ -1894,85 +2421,10 @@
       "category": "Cabin Climate Control",
       "roles": [
         "action"
-      ]
-    },
-    {
-      "id": "sync_mode_toggle",
-      "name": "SYNC Mode Toggle",
-      "tags": [
-        "all_egmp"
       ],
-      "type": "can_tx",
-      "action_can_id": "0x4A0",
-      "bus": 0,
-      "delay_ms": 20,
-      "popup_message": "Climate: SYNC ON",
-      "options": [
-        {
-          "label": "Turn ON",
-          "payload": "00 00 00 0F 00 00 00 00",
-          "popup": "Climate: SYNC ON",
-          "default": true
-        },
-        {
-          "label": "Turn OFF",
-          "payload": "00 00 00 07 00 00 00 00",
-          "popup": "Climate: SYNC OFF"
-        }
-      ],
-      "steps": [
-        {
-          "payload": "00 00 00 0F 00 00 00 00",
-          "repeat": 3
-        },
-        {
-          "payload": "00 00 00 00 00 00 00 00",
-          "repeat": 3
-        }
-      ],
-      "category": "Cabin Climate Control",
-      "roles": [
-        "action"
-      ]
-    },
-    {
-      "id": "driver_only_mode",
-      "name": "Driver Only Mode",
-      "tags": [
-        "all_egmp"
-      ],
-      "type": "can_tx",
-      "action_can_id": "0x41D",
-      "bus": 0,
-      "delay_ms": 20,
-      "popup_message": "Driver Only: ON",
-      "options": [
-        {
-          "label": "Turn ON",
-          "payload": "00 00 00 00 0F 00 00 00",
-          "popup": "Driver Only: ON",
-          "default": true
-        },
-        {
-          "label": "Turn OFF",
-          "payload": "00 00 00 00 0C 00 00 00",
-          "popup": "Driver Only: OFF"
-        }
-      ],
-      "steps": [
-        {
-          "payload": "00 00 00 00 0F 00 00 00",
-          "repeat": 3
-        },
-        {
-          "payload": "00 00 00 00 00 00 00 00",
-          "repeat": 3
-        }
-      ],
-      "category": "Cabin Climate Control",
-      "roles": [
-        "action"
-      ]
+      "state_can_id": null,
+      "ha_domain": "climate",
+      "icon": "mdi:thermostat"
     },
     {
       "id": "active_sound_design__asd__profile",
@@ -1983,6 +2435,7 @@
       "requires_feature": "asd",
       "type": "can_tx",
       "action_can_id": "0x658",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 20,
       "popup_message": "ASD: Dynamic",
@@ -2022,7 +2475,9 @@
       "category": "Vehicle Actuators & Features",
       "roles": [
         "action"
-      ]
+      ],
+      "ha_domain": "select",
+      "icon": "mdi:car-info"
     },
     {
       "id": "surround_view_camera",
@@ -2033,6 +2488,7 @@
       "requires_feature": "camera_360",
       "type": "can_tx",
       "action_can_id": "0x476",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 20,
       "popup_message": "Camera View",
@@ -2049,7 +2505,9 @@
       "category": "Vehicle Actuators & Features",
       "roles": [
         "action"
-      ]
+      ],
+      "ha_domain": "button",
+      "icon": "mdi:cctv"
     },
     {
       "id": "keepalive___wakeup_ping",
@@ -2059,6 +2517,7 @@
       ],
       "type": "can_tx",
       "action_can_id": "0x7DF",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 10,
       "popup_message": "Keepalive Ping",
@@ -2071,7 +2530,9 @@
       "category": "Vehicle Actuators & Features",
       "roles": [
         "action"
-      ]
+      ],
+      "ha_domain": "button",
+      "icon": "mdi:car-info"
     },
     {
       "id": "multi_frame_burst_sequence__x3_",
@@ -2081,6 +2542,7 @@
       ],
       "type": "can_tx",
       "action_can_id": "0x652",
+      "state_can_id": null,
       "bus": 0,
       "delay_ms": 20,
       "popup_message": "",
@@ -2097,7 +2559,9 @@
       "category": "Vehicle Actuators & Features",
       "roles": [
         "action"
-      ]
+      ],
+      "ha_domain": "button",
+      "icon": "mdi:car-info"
     },
     {
       "id": "home_assistant_webhook_event",
@@ -2110,7 +2574,10 @@
       "category": "Home Assistant & Cloud",
       "roles": [
         "action"
-      ]
+      ],
+      "state_can_id": null,
+      "ha_domain": "button",
+      "icon": "mdi:car-info"
     },
     {
       "id": "mqtt_json_event_alert",
@@ -2124,7 +2591,10 @@
       "category": "Home Assistant & Cloud",
       "roles": [
         "action"
-      ]
+      ],
+      "state_can_id": null,
+      "ha_domain": "button",
+      "icon": "mdi:car-info"
     },
     {
       "id": "ambient_mood_lighting",
@@ -2191,7 +2661,9 @@
       "roles": [
         "action",
         "trigger"
-      ]
+      ],
+      "ha_domain": "light",
+      "icon": "mdi:car-light-dimmed"
     },
     {
       "id": "cond_speed_zero",
@@ -2203,7 +2675,9 @@
       "category": "Vehicle State & Safety",
       "roles": [
         "condition"
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:speedometer"
     },
     {
       "id": "selected_gear",
@@ -2241,7 +2715,9 @@
           "label": "Drive (D)",
           "match_payload": "* * 05 * * * * *"
         }
-      ]
+      ],
+      "ha_domain": "sensor",
+      "icon": "mdi:car-shift-pattern"
     },
     {
       "id": "cond_doors_closed",
@@ -2256,7 +2732,9 @@
       "roles": [
         "condition",
         "trigger"
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-door"
     },
     {
       "id": "cond_climate_off",
@@ -2270,7 +2748,9 @@
       "category": "Vehicle State & Safety",
       "roles": [
         "condition"
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-info"
     },
     {
       "id": "cond_charging",
@@ -2285,7 +2765,9 @@
       "roles": [
         "condition",
         "trigger"
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-info"
     },
     {
       "id": "cond_ambient_temperature",
@@ -2318,7 +2800,9 @@
           "label": "Warm (> 25C / 77F)",
           "expression": "[B3] > 65"
         }
-      ]
+      ],
+      "ha_domain": "sensor",
+      "icon": "mdi:thermostat"
     },
     {
       "id": "cond_hv_battery_soc",
@@ -2351,7 +2835,9 @@
           "label": "Low Battery (SOC < 20%)",
           "expression": "[B7] < 40"
         }
-      ]
+      ],
+      "ha_domain": "sensor",
+      "icon": "mdi:car-battery"
     },
     {
       "id": "cond_aux_12v_battery",
@@ -2381,7 +2867,9 @@
           "voltage_val": "12.0",
           "voltage_dir": "below"
         }
-      ]
+      ],
+      "ha_domain": "sensor",
+      "icon": "mdi:car-battery"
     },
     {
       "id": "cond_day_of_week",
@@ -2418,7 +2906,9 @@
             "sun"
           ]
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-info"
     },
     {
       "id": "cond_time_window",
@@ -2448,7 +2938,9 @@
           "start_time": "19:00",
           "end_time": "07:00"
         }
-      ]
+      ],
+      "ha_domain": "binary_sensor",
+      "icon": "mdi:car-info"
     }
   ]
 }

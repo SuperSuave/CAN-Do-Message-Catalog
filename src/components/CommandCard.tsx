@@ -1,6 +1,7 @@
 import React from 'react';
 import { Command, CommandRole } from '../types/catalog';
 import { PayloadByteVisualizer } from './PayloadByteVisualizer';
+import { MdiIcon, getHaDomainBadgeStyle } from './MdiIcon';
 import { 
   Radio, 
   Sliders, 
@@ -123,6 +124,20 @@ export const CommandCard: React.FC<CommandCardProps> = ({
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const hasActionRole = command.roles?.includes('action') || Boolean(command.action_can_id);
+  const hasListenRole = command.roles?.includes('trigger') || command.roles?.includes('condition') || Boolean(command.state_can_id);
+
+  const rxBus = command.bus ?? 0;
+  const rxCanId = command.state_can_id || (!command.action_can_id && !hasActionRole ? command.can_id : undefined);
+
+  const txBus = command.action_bus ?? command.bus ?? 0;
+  const txCanId = command.action_can_id || (hasActionRole && !command.state_can_id ? command.can_id : undefined);
+
+  const hasRx = Boolean(rxCanId || (hasListenRole && command.bus !== undefined));
+  const hasTx = Boolean(txCanId || (hasActionRole && (command.action_bus !== undefined || command.bus !== undefined)));
+
+  const cardMdiIcon = command.icon || command.mdi || 'mdi:car-info';
+
   return (
     <div
       onClick={() => onSelect(command)}
@@ -151,42 +166,74 @@ export const CommandCard: React.FC<CommandCardProps> = ({
       )}
 
       <div className="min-w-0">
-        {/* Top bar: Roles & CAN ID */}
-        <div className="flex flex-wrap items-center justify-between gap-2 mb-3 min-w-0">
-          <div className="flex flex-wrap items-center gap-1.5 min-w-0">
-            {command.roles?.map(role => getRoleBadge(role))}
-            {command.type && (
-              <span className="px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-slate-300 border border-slate-700 shrink-0">
-                {command.type}
-              </span>
-            )}
-          </div>
+        {/* Row 1: ONLY Trigger, Condition, Action pills */}
+        <div className="flex flex-wrap items-center gap-1.5 mb-2 min-w-0">
+          {command.roles && command.roles.length > 0 ? (
+            command.roles.map(role => getRoleBadge(role))
+          ) : (
+            <span className="can-do-ha-pill trig-pill">
+              <Radio className="w-3 h-3 text-amber-400" />
+              Trigger
+            </span>
+          )}
+        </div>
 
-          {((command.state_can_id || command.can_id) || command.action_can_id) && (
-            <div className="flex items-center gap-1.5 text-xs font-mono font-semibold bg-slate-950 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md border border-slate-700/80 shrink-0 max-w-full">
-              {(command.state_can_id || command.can_id) && (
-                <span className="text-cyan-300 truncate" title={command.action_can_id ? "State / Rx CAN ID" : "CAN ID"}>
-                  {command.action_can_id ? `Rx:${command.state_can_id || command.can_id}` : (command.state_can_id || command.can_id)}
-                </span>
-              )}
-              {command.action_can_id && (
+        {/* Row 2: TX Bus / RX Bus */}
+        <div className="flex flex-wrap items-center gap-1.5 mb-3 text-xs font-mono">
+          {hasRx && (
+            <div 
+              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-950/80 border border-slate-800/80 text-cyan-300 shrink-0"
+              title={rxCanId ? `RX CAN ID: ${rxCanId} on Bus ${rxBus}` : `RX Bus ${rxBus}`}
+            >
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">RX Bus {rxBus}</span>
+              {rxCanId && (
                 <>
-                  {(command.state_can_id || command.can_id) && <span className="text-slate-600">/</span>}
-                  <span className="text-emerald-400 truncate" title="Action / Tx CAN ID">
-                    Tx:{command.action_can_id}
-                  </span>
+                  <span className="text-slate-600">•</span>
+                  <span className="font-semibold text-cyan-300">{rxCanId}</span>
+                  {command.options && command.options.length > 0 && (
+                    <span className="text-[10px] text-cyan-400 bg-cyan-950/90 px-1 py-0.2 rounded border border-cyan-800/80 font-sans font-medium" title={`${command.options.length} Defined States mapped for this CAN ID`}>
+                      {command.options.length} states
+                    </span>
+                  )}
                 </>
               )}
-              <span className="text-slate-500 shrink-0">•</span>
-              <span className="text-slate-400 text-[10px] shrink-0">Bus {command.bus ?? 0}</span>
+            </div>
+          )}
+
+          {hasTx && (
+            <div 
+              className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-950/80 border border-slate-800/80 text-emerald-300 shrink-0"
+              title={txCanId ? `TX CAN ID: ${txCanId} on Bus ${txBus}` : `TX Bus ${txBus}`}
+            >
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">TX Bus {txBus}</span>
+              {txCanId && (
+                <>
+                  <span className="text-slate-600">•</span>
+                  <span className="font-semibold text-emerald-400">{txCanId}</span>
+                </>
+              )}
+            </div>
+          )}
+
+          {!hasRx && !hasTx && (
+            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-950/80 border border-slate-800/80 text-slate-400 shrink-0">
+              <span className="text-[10px] uppercase font-bold text-slate-500">Virtual / OSD</span>
             </div>
           )}
         </div>
 
-        {/* Command Title & ID / Category (Safeguarded from floating off card) */}
-        <h3 className="text-base font-semibold text-white group-hover:text-cyan-300 transition-colors truncate mb-1" title={command.name}>
-          {command.name}
-        </h3>
+        {/* Command Title & ID / Category with MDI Icon */}
+        <div className="flex items-center gap-2.5 mb-1 min-w-0">
+          <div
+            className="w-7 h-7 rounded-lg bg-sky-950/60 border border-sky-800/60 flex items-center justify-center text-sky-400 shrink-0 group-hover:border-sky-500/70 group-hover:text-sky-300 transition-colors shadow-sm"
+            title={`MDI: ${cardMdiIcon}`}
+          >
+            <MdiIcon icon={cardMdiIcon} className="w-4 h-4" />
+          </div>
+          <h3 className="text-base font-semibold text-white group-hover:text-cyan-300 transition-colors truncate" title={command.name}>
+            {command.name}
+          </h3>
+        </div>
         <div className="text-xs text-slate-400 mb-3 flex items-center gap-1.5 min-w-0 overflow-hidden">
           <span className="font-mono text-slate-400 truncate shrink min-w-0 text-[11px]" title={command.id}>
             {command.id}
@@ -215,7 +262,7 @@ export const CommandCard: React.FC<CommandCardProps> = ({
               <div className="flex items-center justify-between text-slate-400 mb-1.5 font-medium gap-1 min-w-0">
                 <span className="flex items-center gap-1 text-[11px] text-slate-300 truncate">
                   <Layers className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-                  <span className="truncate">{command.options.length} Selectable Options:</span>
+                  <span className="truncate">{command.options.length} Defined States:</span>
                 </span>
                 <span className="text-[10px] text-slate-500 truncate shrink-0">
                   Default: {command.options.find(o => o.default)?.label || command.options[0].label}
@@ -231,17 +278,29 @@ export const CommandCard: React.FC<CommandCardProps> = ({
                         : 'bg-slate-900/80 text-slate-300 border border-slate-800'
                     }`}
                   >
-                    <span className="font-semibold shrink-0">{opt.label}</span>
+                    <div className="flex items-center gap-1.5 shrink-0 min-w-0">
+                      {opt.state_value !== undefined && opt.state_value !== '' && (
+                        <span className="text-[10px] px-1 py-0.2 rounded bg-slate-800 text-cyan-400 border border-slate-700 font-mono font-semibold">
+                          {opt.state_value}
+                        </span>
+                      )}
+                      <span className="font-semibold truncate">{opt.label}</span>
+                    </div>
                     <div className="flex items-center gap-1 flex-wrap justify-end min-w-0">
+                      {opt.match_payload && (
+                        <span className="text-[10px] text-cyan-300 bg-cyan-950/70 px-1 py-0.5 rounded border border-cyan-800/40 truncate font-mono" title={`RX Match State: ${opt.match_payload}`}>
+                          RX: {opt.match_payload}
+                        </span>
+                      )}
                       {opt.steps && opt.steps.length > 0 ? (
                         opt.steps.map((st, sidx) => (
                           <span key={sidx} className="text-[10px] text-emerald-300 bg-emerald-950/60 px-1 py-0.5 rounded border border-emerald-800/40 truncate">
-                            {st.payload} {st.repeat ? <strong className="text-amber-400 font-bold">x{st.repeat}</strong> : null}
+                            TX: {st.payload} {st.repeat ? <strong className="text-amber-400 font-bold">x{st.repeat}</strong> : null}
                           </span>
                         ))
                       ) : opt.to_payload ? (
-                        <span className="text-[10px] text-emerald-300 truncate">
-                          {opt.to_payload} {opt.repeat ? <strong className="text-amber-400 font-bold">x{opt.repeat}</strong> : null}
+                        <span className="text-[10px] text-emerald-300 bg-emerald-950/60 px-1 py-0.5 rounded border border-emerald-800/40 truncate font-mono" title={`TX Action: ${opt.to_payload}`}>
+                          TX: {opt.to_payload} {opt.repeat ? <strong className="text-amber-400 font-bold">x{opt.repeat}</strong> : null}
                         </span>
                       ) : null}
                     </div>
@@ -249,7 +308,7 @@ export const CommandCard: React.FC<CommandCardProps> = ({
                 ))}
                 {command.options.length > 3 && (
                   <span className="text-[10px] text-slate-500 px-1">
-                    +{command.options.length - 3} more options
+                    +{command.options.length - 3} more defined states
                   </span>
                 )}
               </div>
@@ -283,9 +342,26 @@ export const CommandCard: React.FC<CommandCardProps> = ({
           )}
         </div>
 
-        {/* Feature requirements and tags */}
-        {(command.requires_feature || (command.tags && command.tags.length > 0)) && (
-          <div className="flex flex-wrap items-center gap-1.5 mb-4 min-w-0">
+        {/* Details below grids/options: HA domain, type, requirements, and tags */}
+        {(command.ha_domain || command.type || command.requires_feature || (command.tags && command.tags.length > 0)) && (
+          <div className="flex flex-wrap items-center gap-1.5 mb-3 min-w-0">
+            {command.ha_domain && (() => {
+              const domainStyle = getHaDomainBadgeStyle(command.ha_domain);
+              return (
+                <span
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10.5px] font-mono font-medium border shrink-0 ${domainStyle.bg} ${domainStyle.text} ${domainStyle.border}`}
+                  title={`Home Assistant Domain: ${command.ha_domain}`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full ${domainStyle.dot}`} />
+                  ha:{command.ha_domain}
+                </span>
+              );
+            })()}
+            {command.type && (
+              <span className="px-2 py-0.5 rounded text-[10.5px] font-mono bg-slate-900 text-slate-400 border border-slate-800 shrink-0">
+                {command.type}
+              </span>
+            )}
             {command.requires_feature && (
               <span className="inline-flex items-center gap-1 text-[11px] font-medium text-emerald-300 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-700/40 truncate max-w-full">
                 <Car className="w-3 h-3 shrink-0" />

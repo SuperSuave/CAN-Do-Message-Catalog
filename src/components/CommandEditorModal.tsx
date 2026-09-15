@@ -4,6 +4,8 @@ import { validateCommand, getAllKnownFeatures } from '../utils/canValidator';
 import { parseCanCaptureNote } from '../utils/canCaptureParser';
 import { PayloadByteVisualizer } from './PayloadByteVisualizer';
 import { PayloadByteEditor } from './PayloadByteEditor';
+import { StateDefinitionsEditor } from './StateDefinitionsEditor';
+import { MdiIcon, COMMON_HA_DOMAINS, SUGGESTED_MDI_ICONS, getHaDomainBadgeStyle } from './MdiIcon';
 import {
   X,
   Plus,
@@ -17,7 +19,8 @@ import {
   User,
   FileText,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Home
 } from 'lucide-react';
 
 interface CommandEditorModalProps {
@@ -89,7 +92,11 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
     options: [],
     steps: [],
     popup_message: '',
-    delay_ms: 20
+    delay_ms: 20,
+    ha_domain: 'event',
+    icon: 'mdi:steering',
+    mdi: 'mdi:steering',
+    device_class: ''
   });
 
   const [tagsInput, setTagsInput] = useState('');
@@ -185,7 +192,11 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
         options: [],
         steps: [],
         popup_message: '',
-        delay_ms: 20
+        delay_ms: 20,
+        ha_domain: 'event',
+        icon: 'mdi:steering',
+        mdi: 'mdi:steering',
+        device_class: ''
       });
       setIsIdManuallyEdited(false);
       setTagsInput('');
@@ -375,6 +386,28 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
       delete cleaned.to_payload;
       delete cleaned.match_payload;
       delete cleaned.options;
+    }
+
+    if (formData.ha_domain && formData.ha_domain.trim() !== '') {
+      cleaned.ha_domain = formData.ha_domain.trim();
+    } else {
+      delete cleaned.ha_domain;
+    }
+
+    const iconVal = (formData.icon || formData.mdi || '').trim();
+    if (iconVal) {
+      const formattedIcon = iconVal.startsWith('mdi:') ? iconVal : `mdi:${iconVal}`;
+      cleaned.icon = formattedIcon;
+      cleaned.mdi = formattedIcon;
+    } else {
+      delete cleaned.icon;
+      delete cleaned.mdi;
+    }
+
+    if (formData.device_class && formData.device_class.trim() !== '') {
+      cleaned.device_class = formData.device_class.trim();
+    } else {
+      delete cleaned.device_class;
     }
 
     const trimmedName = contributorName.trim();
@@ -681,9 +714,52 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
                     onChange={e => setFormData({ ...formData, state_can_id: e.target.value })}
                     className="w-full px-3 py-1.5 rounded-[8px] bg-[var(--input-bg)] border border-[var(--border-color)] font-mono text-sm text-cyan-300 focus:outline-none focus:border-[var(--md-sys-color-primary)]"
                   />
-                  <span className="text-[10px] text-slate-500 mt-1 block">
-                    11-bit (&le;0x7FF) or 29-bit extended
-                  </span>
+                  <div className="flex items-center justify-between text-[10px] text-slate-500 mt-1">
+                    <span>11-bit (&le;0x7FF) or 29-bit</span>
+                    {formData.options && formData.options.length > 0 && (
+                      <span className="text-cyan-400 font-medium">
+                        {formData.options.length} states mapped
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Quick State Definition Link */}
+                  <div className="mt-2 p-2 rounded-[8px] bg-cyan-950/40 border border-cyan-800/60 flex flex-col gap-1.5">
+                    <div className="flex items-center justify-between gap-1">
+                      <span className="text-[11px] font-semibold text-cyan-300 flex items-center gap-1">
+                        <Layers className="w-3 h-3 text-cyan-400" />
+                        State Definitions ("What state is what")
+                      </span>
+                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-cyan-900/80 text-cyan-200 border border-cyan-700/60 font-semibold">
+                        {formData.options && formData.options.length > 0
+                          ? `${formData.options.length} states`
+                          : 'Not set'}
+                      </span>
+                    </div>
+                    <p className="text-[10px] text-slate-400 leading-tight">
+                      {formData.options && formData.options.length > 0
+                        ? formData.options.map(o => o.label).slice(0, 3).join(', ') + (formData.options.length > 3 ? '...' : '')
+                        : 'Define what each CAN state means (Park, Drive, Open, Closed, etc.)'}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setActivePayloadMode('options');
+                        if (!formData.options || formData.options.length === 0) {
+                          handleAddOption();
+                        }
+                        setTimeout(() => {
+                          const el = document.getElementById('payload-pattern-config-section');
+                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 50);
+                      }}
+                      className="w-full text-center py-1 rounded bg-cyan-900/70 hover:bg-cyan-800 text-cyan-200 border border-cyan-700 text-[11px] font-semibold transition"
+                    >
+                      {formData.options && formData.options.length > 0
+                        ? 'Edit State Mappings ("What state is what")'
+                        : '+ Define States for this CAN ID'}
+                    </button>
+                  </div>
                 </div>
 
                 <div>
@@ -709,7 +785,18 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
                   </label>
                   <select
                     value={formData.type || 'can_tx'}
-                    onChange={e => setFormData({ ...formData, type: e.target.value })}
+                    onChange={e => {
+                      const newType = e.target.value;
+                      const updates: Partial<typeof formData> = { type: newType };
+                      if (newType === 'popup' && (!formData.ha_domain || formData.ha_domain === 'event' || formData.ha_domain === 'button')) {
+                        updates.ha_domain = 'notify';
+                        if (!formData.icon || formData.icon === 'mdi:steering') {
+                          updates.icon = 'mdi:message-badge';
+                          updates.mdi = 'mdi:message-badge';
+                        }
+                      }
+                      setFormData({ ...formData, ...updates });
+                    }}
                     className="w-full px-3 py-1.5 rounded-[8px] bg-[var(--input-bg)] border border-[var(--border-color)] text-sm text-white focus:outline-none focus:border-[var(--md-sys-color-primary)]"
                   >
                     {COMMAND_TYPES.map(t => (
@@ -771,12 +858,34 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
             </div>
 
             {/* Row 4: Payload Mode Selector */}
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300">
-                  Payload Pattern Configuration
+            <div id="payload-pattern-config-section">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                <label className="text-xs font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                  <span>Payload Pattern Configuration</span>
+                  {formData.state_can_id && (
+                    <span className="text-[10px] text-cyan-400 font-mono font-normal">
+                      for {formData.state_can_id}
+                    </span>
+                  )}
                 </label>
-                <div className="flex items-center gap-1 text-xs">
+                <div className="flex flex-wrap items-center gap-1 text-xs">
+                  <button
+                    type="button"
+                    onClick={() => setActivePayloadMode('options')}
+                    className={`px-3 py-1 rounded-full text-xs font-medium border transition flex items-center gap-1.5 ${
+                      activePayloadMode === 'options'
+                        ? 'bg-[var(--md-sys-color-primary)] text-white border-[var(--md-sys-color-primary)] shadow-sm'
+                        : 'bg-[var(--input-bg)] border-[var(--border-color)] text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>State Definitions ("What State is What")</span>
+                    {formData.options && formData.options.length > 0 && (
+                      <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-cyan-950 text-cyan-300 border border-cyan-800 font-mono font-bold">
+                        {formData.options.length}
+                      </span>
+                    )}
+                  </button>
                   <button
                     type="button"
                     onClick={() => setActivePayloadMode('transition')}
@@ -797,18 +906,7 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
                         : 'bg-[var(--input-bg)] border-[var(--border-color)] text-slate-400 hover:text-white'
                     }`}
                   >
-                    Match State Pattern
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActivePayloadMode('options')}
-                    className={`px-3 py-1 rounded-full text-xs font-medium border transition ${
-                      activePayloadMode === 'options'
-                        ? 'bg-[var(--md-sys-color-primary)] text-white border-[var(--md-sys-color-primary)]'
-                        : 'bg-[var(--input-bg)] border-[var(--border-color)] text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    Multiple Options
+                    Single Match Pattern
                   </button>
                   <button
                     type="button"
@@ -908,229 +1006,16 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
                 </div>
               )}
 
-              {/* Mode 3: Options */}
+              {/* Mode 3: State Definitions ("What State is What") */}
               {activePayloadMode === 'options' && (
-                <div className="p-4 rounded-[12px] bg-[var(--md-sys-color-surface-container-low)] border border-[var(--border-color)] space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-medium text-slate-400">
-                      Configured Options ({formData.options?.length || 0})
-                    </span>
-                    <button
-                      type="button"
-                      onClick={handleAddOption}
-                      className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[var(--md-sys-color-primary)] text-white text-xs hover:opacity-90 transition font-medium"
-                    >
-                      <Plus className="w-3.5 h-3.5" /> Add Option
-                    </button>
-                  </div>
-
-                  {(!formData.options || formData.options.length === 0) && (
-                    <div className="text-xs text-slate-500 py-3 text-center border border-dashed border-[var(--border-color)] rounded-[8px]">
-                      No options defined yet. Click "Add Option" to create values (e.g. 50%, 80%, High, Low).
-                    </div>
-                  )}
-
-                  <div className="space-y-3">
-                    {formData.options?.map((opt, idx) => (
-                      <div
-                        key={idx}
-                        className="p-4 rounded-[12px] bg-[var(--input-bg)] border border-[var(--border-color)] space-y-4 text-xs shadow-sm"
-                      >
-                        {/* Top row: Label, Type tags, Default, Delete */}
-                        <div className="flex flex-wrap items-center justify-between gap-3">
-                          <div className="flex items-center gap-2 flex-1 min-w-[220px]">
-                            <input
-                              type="text"
-                              placeholder="Option Label (e.g. High, Low, Off, 80%)"
-                              value={opt.label}
-                              onChange={e => handleUpdateOption(idx, { label: e.target.value })}
-                              className="w-full px-3 py-2 rounded-[8px] bg-[var(--card-bg)] border border-[var(--border-color)] text-white font-medium text-xs focus:outline-none focus:border-[var(--md-sys-color-primary)]"
-                            />
-                          </div>
-
-                          <div className="flex items-center gap-2.5">
-                            <input
-                              type="text"
-                              placeholder="OSD Toast (optional)"
-                              value={opt.popup || ''}
-                              onChange={e => handleUpdateOption(idx, { popup: e.target.value })}
-                              className="w-36 sm:w-44 px-2.5 py-1.5 rounded-[8px] bg-[var(--card-bg)] border border-[var(--border-color)] text-slate-300 text-xs"
-                            />
-
-                            <label className="flex items-center gap-1.5 cursor-pointer px-2.5 py-1.5 rounded-[8px] bg-[var(--card-bg)] border border-[var(--border-color)] hover:border-slate-700 transition">
-                              <input
-                                type="radio"
-                                name="default_option"
-                                checked={!!opt.default}
-                                onChange={() => handleUpdateOption(idx, { default: true })}
-                                className="accent-[var(--md-sys-color-primary)]"
-                              />
-                              <span className="text-[11px] text-slate-300 font-semibold">Default</span>
-                            </label>
-
-                            <button
-                              type="button"
-                              onClick={() => handleRemoveOption(idx)}
-                              className="p-1.5 hover:text-rose-400 hover:bg-rose-950/30 text-slate-500 rounded transition"
-                              title="Delete Option"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Option Prerequisite Feature */}
-                        <div className="flex items-center gap-3 pt-2 border-t border-[var(--border-color)]/50">
-                          <span className="text-[11px] text-slate-400 font-medium">Requires Feature:</span>
-                          <select
-                            value={opt.requires_feature || ''}
-                            onChange={e => handleUpdateOption(idx, { requires_feature: e.target.value || undefined })}
-                            className="px-2.5 py-1 rounded-[6px] bg-[var(--card-bg)] border border-[var(--border-color)] text-xs text-slate-200 focus:outline-none focus:border-[var(--md-sys-color-primary)]"
-                          >
-                            <option value="">None (Always available)</option>
-                            {knownFeatures.map(feat => (
-                              <option key={feat} value={feat}>
-                                {feat}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        {/* Option Steps vs Single Transition */}
-                        {opt.steps && opt.steps.length > 0 ? (
-                          <div className="space-y-3 pt-3 border-t border-[var(--border-color)]/60">
-                            <div className="flex items-center justify-between">
-                              <span className="text-[11px] font-semibold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
-                                <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                                Option Sequential Steps ({opt.steps.length})
-                              </span>
-                              <button
-                                type="button"
-                                onClick={() => {
-                                  const newSteps = [...(opt.steps || []), { payload: '00 00 00 00 00 00 00 00', repeat: 3 }];
-                                  handleUpdateOption(idx, { steps: newSteps });
-                                }}
-                                className="px-2.5 py-1 rounded-[6px] bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 hover:bg-emerald-900/50 transition font-medium text-[11px]"
-                              >
-                                + Add Step
-                              </button>
-                            </div>
-
-                            <div className="space-y-2">
-                              {opt.steps.map((st, sIdx) => (
-                                <div key={sIdx} className="p-3 rounded-[10px] bg-slate-950/60 border border-slate-800/80 space-y-2">
-                                  <div className="flex items-center justify-between">
-                                    <span className="font-mono text-slate-300 font-semibold flex items-center gap-2">
-                                      <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-[10px] text-slate-400">
-                                        {sIdx + 1}
-                                      </span>
-                                      Step Payload
-                                    </span>
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-slate-400 text-[11px]">Repeat:</span>
-                                      <input
-                                        type="number"
-                                        min="1"
-                                        max="50"
-                                        value={st.repeat || 1}
-                                        onChange={e => {
-                                          const updatedSteps = [...(opt.steps || [])];
-                                          updatedSteps[sIdx] = { ...updatedSteps[sIdx], repeat: parseInt(e.target.value) || 1 };
-                                          handleUpdateOption(idx, { steps: updatedSteps });
-                                        }}
-                                        className="w-16 px-2 py-1 rounded-[6px] bg-[var(--input-bg)] border border-[var(--border-color)] font-mono text-xs text-amber-300 text-center font-bold"
-                                      />
-                                      <span className="text-slate-400 text-[11px]">times</span>
-                                      <button
-                                        type="button"
-                                        onClick={() => {
-                                          const updatedSteps = (opt.steps || []).filter((_, i) => i !== sIdx);
-                                          handleUpdateOption(idx, { steps: updatedSteps });
-                                        }}
-                                        className="p-1 text-slate-500 hover:text-rose-400 rounded transition"
-                                      >
-                                        <Trash2 className="w-3.5 h-3.5" />
-                                      </button>
-                                    </div>
-                                  </div>
-                                  <PayloadByteEditor
-                                    label=""
-                                    value={st.payload || '* * * * * * * *'}
-                                    onChange={val => {
-                                      const updatedSteps = [...(opt.steps || [])];
-                                      updatedSteps[sIdx] = { ...updatedSteps[sIdx], payload: val };
-                                      handleUpdateOption(idx, { steps: updatedSteps });
-                                    }}
-                                  />
-                                </div>
-                              ))}
-                            </div>
-
-                            <div className="flex items-center justify-between pt-1">
-                              {opt.from_payload && (
-                                <span className="text-[11px] text-slate-400">
-                                  Trigger: <span className="text-amber-300 font-mono">{opt.from_payload}</span>
-                                </span>
-                              )}
-                              <button
-                                type="button"
-                                onClick={() => handleUpdateOption(idx, { steps: undefined, to_payload: '* * * * * * * *' })}
-                                className="text-[11px] text-slate-400 hover:text-white underline transition ml-auto"
-                              >
-                                Switch to Single Payload Transition
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="space-y-3 pt-3 border-t border-[var(--border-color)]/60">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                              <PayloadByteEditor
-                                label="From Payload (Optional Trigger)"
-                                value={opt.from_payload || '* * * * * * * *'}
-                                onChange={val => handleUpdateOption(idx, { from_payload: val })}
-                              />
-                              <div className="space-y-3">
-                                <PayloadByteEditor
-                                  label="To Payload (Action / Target)"
-                                  value={opt.to_payload || (opt.payload && !opt.from_payload ? opt.payload : '* * * * * * * *')}
-                                  onChange={val => handleUpdateOption(idx, { to_payload: val, payload: val })}
-                                />
-                                <div className="flex items-center justify-between gap-3 px-3 py-2.5 rounded-[10px] bg-slate-950/60 border border-slate-800">
-                                  <span className="text-xs font-semibold text-slate-300">Action Repeat (Times)</span>
-                                  <div className="flex items-center gap-1.5">
-                                    <input
-                                      type="number"
-                                      min="1"
-                                      max="100"
-                                      value={opt.repeat || 1}
-                                      onChange={e => handleUpdateOption(idx, { repeat: parseInt(e.target.value) || 1 })}
-                                      className="w-16 px-2 py-1 rounded bg-[var(--input-bg)] border border-[var(--border-color)] font-mono text-xs text-amber-300 text-center font-bold focus:outline-none focus:border-amber-500"
-                                    />
-                                    <span className="text-xs text-slate-400">times</span>
-                                  </div>
-                                </div>
-                              </div>
-                              <PayloadByteEditor
-                                label="Match Payload (Condition State)"
-                                value={opt.match_payload || '* * * * * * * *'}
-                                onChange={val => handleUpdateOption(idx, { match_payload: val })}
-                              />
-                            </div>
-                            <div className="flex justify-end pt-1">
-                              <button
-                                type="button"
-                                onClick={() => handleUpdateOption(idx, { steps: [{ payload: opt.to_payload || opt.payload || '00 00 00 00 00 00 00 00', repeat: 3 }] })}
-                                className="text-[11px] text-cyan-400 hover:text-cyan-300 underline transition"
-                              >
-                                Switch to Multi-Step Sequence (with x3 support)
-                              </button>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <StateDefinitionsEditor
+                  options={formData.options || []}
+                  stateCanId={formData.state_can_id}
+                  bus={formData.bus ?? 0}
+                  actionCanId={formData.action_can_id}
+                  knownFeatures={knownFeatures}
+                  onChange={newOptions => setFormData(prev => ({ ...prev, options: newOptions }))}
+                />
               )}
 
               {/* Mode 4: Burst Steps */}
@@ -1242,6 +1127,156 @@ export const CommandEditorModal: React.FC<CommandEditorModalProps> = ({
                   }
                   className="w-full px-3 py-2 rounded-[8px] bg-[var(--input-bg)] border border-[var(--border-color)] font-mono text-xs text-white focus:outline-none focus:border-[var(--md-sys-color-primary)]"
                 />
+              </div>
+            </div>
+
+            {/* Home Assistant & MDI Integration */}
+            <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 space-y-3.5">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-sky-950/70 border border-sky-800/60 flex items-center justify-center text-sky-400">
+                    <Home className="w-3.5 h-3.5" />
+                  </div>
+                  <span className="text-xs font-bold text-white uppercase tracking-wider">
+                    Home Assistant & MDI Integration (ha_domain, mdi / icon)
+                  </span>
+                </div>
+                <span className="text-[11px] text-slate-400">
+                  Controls entity type and icon rendering across Home Assistant & the catalog
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {/* HA Domain */}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-semibold text-slate-300">
+                      Home Assistant Domain (ha_domain)
+                    </label>
+                    {formData.ha_domain && (() => {
+                      const domainStyle = getHaDomainBadgeStyle(formData.ha_domain);
+                      return (
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded border font-mono ${domainStyle.bg} ${domainStyle.text} ${domainStyle.border}`}>
+                          {formData.ha_domain}
+                        </span>
+                      );
+                    })()}
+                  </div>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      list="ha-domain-suggestions"
+                      placeholder="e.g. event, sensor, binary_sensor"
+                      value={formData.ha_domain || ''}
+                      onChange={e => setFormData({ ...formData, ha_domain: e.target.value })}
+                      className="w-full px-3 py-2 rounded-[8px] bg-[var(--input-bg)] border border-[var(--border-color)] font-mono text-xs text-sky-300 focus:outline-none focus:border-[var(--md-sys-color-primary)]"
+                    />
+                    <datalist id="ha-domain-suggestions">
+                      {COMMON_HA_DOMAINS.map(d => (
+                        <option key={d.id} value={d.id}>
+                          {d.label} — {d.description}
+                        </option>
+                      ))}
+                    </datalist>
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-1.5">
+                    {['notify', 'event', 'binary_sensor', 'sensor', 'switch', 'climate'].map(d => (
+                      <button
+                        key={d}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, ha_domain: d })}
+                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded border transition ${
+                          formData.ha_domain === d
+                            ? 'bg-sky-500/20 text-sky-300 border-sky-500 font-bold'
+                            : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                        }`}
+                      >
+                        {d}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* MDI Icon with live preview */}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-semibold text-slate-300">
+                      MDI Icon (mdi / icon)
+                    </label>
+                    <span className="text-[10px] text-slate-500 font-mono">mdi:icon-name</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div
+                      className="w-9 h-9 rounded-lg bg-sky-950/70 border border-sky-800/70 flex items-center justify-center text-sky-400 shrink-0 shadow-sm"
+                      title={formData.icon || formData.mdi || 'No icon set'}
+                    >
+                      <MdiIcon icon={formData.icon || formData.mdi} className="w-5 h-5" />
+                    </div>
+                    <div className="relative flex-1">
+                      <input
+                        type="text"
+                        list="mdi-icon-suggestions"
+                        placeholder="e.g. mdi:steering"
+                        value={formData.icon || formData.mdi || ''}
+                        onChange={e => {
+                          const val = e.target.value;
+                          setFormData({ ...formData, icon: val, mdi: val });
+                        }}
+                        className="w-full px-3 py-2 rounded-[8px] bg-[var(--input-bg)] border border-[var(--border-color)] font-mono text-xs text-sky-300 focus:outline-none focus:border-[var(--md-sys-color-primary)]"
+                      />
+                      <datalist id="mdi-icon-suggestions">
+                        {SUGGESTED_MDI_ICONS.map(i => (
+                          <option key={i.id} value={i.id}>
+                            {i.label} ({i.category})
+                          </option>
+                        ))}
+                      </datalist>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-1 mt-1.5">
+                    {['mdi:message-badge', 'mdi:steering', 'mdi:thermostat', 'mdi:car-door', 'mdi:car-battery', 'mdi:speedometer'].map(ic => (
+                      <button
+                        key={ic}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, icon: ic, mdi: ic })}
+                        className={`text-[10px] font-mono px-1.5 py-0.5 rounded border transition flex items-center gap-1 ${
+                          (formData.icon === ic || formData.mdi === ic)
+                            ? 'bg-sky-500/20 text-sky-300 border-sky-500 font-bold'
+                            : 'bg-slate-900 text-slate-400 border-slate-800 hover:border-slate-700'
+                        }`}
+                      >
+                        <MdiIcon icon={ic} className="w-2.5 h-2.5" />
+                        <span>{ic.replace('mdi:', '')}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Device Class */}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="block text-xs font-semibold text-slate-300">
+                      Device Class <span className="text-slate-500 font-normal text-[11px]">(Optional)</span>
+                    </label>
+                    <span className="text-[10px] text-slate-500">HA component class</span>
+                  </div>
+                  <input
+                    type="text"
+                    list="device-class-suggestions"
+                    placeholder="e.g. door, window, battery"
+                    value={formData.device_class || ''}
+                    onChange={e => setFormData({ ...formData, device_class: e.target.value })}
+                    className="w-full px-3 py-2 rounded-[8px] bg-[var(--input-bg)] border border-[var(--border-color)] font-mono text-xs text-white focus:outline-none focus:border-[var(--md-sys-color-primary)] placeholder:text-slate-600"
+                  />
+                  <datalist id="device-class-suggestions">
+                    {['door', 'window', 'battery', 'battery_charging', 'power', 'temperature', 'speed', 'lock', 'motion', 'problem', 'plug', 'heat'].map(dc => (
+                      <option key={dc} value={dc} />
+                    ))}
+                  </datalist>
+                  <p className="text-[10px] text-slate-500 mt-1.5">
+                    Controls state display format & icons in Home Assistant.
+                  </p>
+                </div>
               </div>
             </div>
 

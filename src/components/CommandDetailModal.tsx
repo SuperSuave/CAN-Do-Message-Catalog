@@ -4,6 +4,7 @@ import { PayloadByteVisualizer } from './PayloadByteVisualizer';
 import { validateCommand } from '../utils/canValidator';
 import { exportCommandToDbcSnippet } from '../utils/dbcConverter';
 import { formatCommandAsCanCapture } from '../utils/canCaptureParser';
+import { MdiIcon, getHaDomainBadgeStyle } from './MdiIcon';
 import {
   X,
   Copy,
@@ -20,7 +21,9 @@ import {
   User,
   ExternalLink,
   FileCode,
-  FileText
+  FileText,
+  Home,
+  Sparkles
 } from 'lucide-react';
 
 interface CommandDetailModalProps {
@@ -41,12 +44,71 @@ export const CommandDetailModal: React.FC<CommandDetailModalProps> = ({
   const [copied, setCopied] = useState(false);
   const [copiedDbc, setCopiedDbc] = useState(false);
   const [copiedCapture, setCopiedCapture] = useState(false);
+  const [copiedHaYaml, setCopiedHaYaml] = useState(false);
+  const [copiedIcon, setCopiedIcon] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
-  const [activeTab, setActiveTab] = useState<'overview' | 'vehicles' | 'cancapture' | 'raw_json' | 'dbc'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'vehicles' | 'cancapture' | 'homeassistant' | 'raw_json' | 'dbc'>('overview');
 
   if (!command) return null;
 
   const dbcSnippet = exportCommandToDbcSnippet(command);
+
+  const haYamlSnippet = (() => {
+    const domain = command.ha_domain || 'sensor';
+    const iconStr = command.icon || command.mdi || 'mdi:car-info';
+    const rxCan = command.state_can_id || command.can_id;
+    const txCan = command.action_can_id;
+    const lines: string[] = [
+      `# Home Assistant Entity Configuration for CAN-Do`,
+      `# Domain: ${domain}`,
+      `${domain}:`,
+      `  - platform: can_do`,
+      `    name: "${command.name}"`,
+      `    unique_id: "can_do_${command.id}"`,
+      `    icon: "${iconStr}"`
+    ];
+    if (command.device_class) {
+      lines.push(`    device_class: "${command.device_class}"`);
+    }
+    if (rxCan) {
+      lines.push(`    can_id: "${rxCan}"`);
+      lines.push(`    bus: ${command.bus ?? 0}`);
+    }
+    if (txCan) {
+      lines.push(`    action_can_id: "${txCan}"`);
+      lines.push(`    action_bus: ${command.action_bus ?? command.bus ?? 0}`);
+    }
+    if (command.from_payload) lines.push(`    from_payload: "${command.from_payload}"`);
+    if (command.to_payload) lines.push(`    to_payload: "${command.to_payload}"`);
+    if (command.match_payload) lines.push(`    match_payload: "${command.match_payload}"`);
+    if (command.payload_mask) lines.push(`    payload_mask: "${command.payload_mask}"`);
+    if (command.requires_feature) lines.push(`    requires_feature: "${command.requires_feature}"`);
+    if (command.options && command.options.length > 0) {
+      lines.push(`    options:`);
+      command.options.forEach(o => {
+        lines.push(`      - label: "${o.label}"`);
+        if (o.popup_message) lines.push(`        popup_message: "${o.popup_message}"`);
+        if (o.popup_message_imperial) lines.push(`        popup_message_imperial: "${o.popup_message_imperial}"`);
+        if (o.payload) lines.push(`        payload: "${o.payload}"`);
+        if (o.to_payload) lines.push(`        to_payload: "${o.to_payload}"`);
+        if (o.match_payload) lines.push(`        match_payload: "${o.match_payload}"`);
+        if (o.default) lines.push(`        default: true`);
+      });
+    }
+
+    if (domain === 'notify' || command.type === 'popup') {
+      lines.push('');
+      lines.push('# Example Home Assistant Automation / Action Call:');
+      lines.push('# action: notify.send_message');
+      lines.push('# target:');
+      lines.push(`#   entity_id: notify.can_do_${command.id}`);
+      lines.push('# data:');
+      const sampleMsg = command.options?.find(o => o.popup_message)?.popup_message || command.popup_message || 'Vehicle Alert Toast';
+      lines.push(`#   message: "${sampleMsg}"`);
+    }
+
+    return lines.join('\n');
+  })();
 
   const issues = validateCommand(command, catalog, false);
   const hasErrors = issues.some(i => i.type === 'error');
@@ -107,11 +169,39 @@ export const CommandDetailModal: React.FC<CommandDetailModalProps> = ({
                   Type: {command.type}
                 </span>
               )}
+              {command.ha_domain && (() => {
+                const domainStyle = getHaDomainBadgeStyle(command.ha_domain);
+                return (
+                  <span
+                    className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[6px] text-xs font-mono font-semibold border ${domainStyle.bg} ${domainStyle.text} ${domainStyle.border}`}
+                    title={`Home Assistant Domain: ${command.ha_domain}`}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full ${domainStyle.dot}`} />
+                    HA: {command.ha_domain}
+                  </span>
+                );
+              })()}
+              {(command.icon || command.mdi) && (
+                <span
+                  className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[6px] text-xs font-mono font-medium bg-sky-950/70 text-sky-300 border border-sky-800/60"
+                  title={`MDI Icon: ${command.icon || command.mdi}`}
+                >
+                  <MdiIcon icon={command.icon || command.mdi} className="w-3.5 h-3.5 text-sky-400" />
+                  {command.icon || command.mdi}
+                </span>
+              )}
             </div>
 
-            <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
-              {command.name}
-            </h2>
+            <div className="flex items-center gap-3">
+              {(command.icon || command.mdi) && (
+                <div className="w-9 h-9 rounded-xl bg-sky-950/70 border border-sky-800/70 flex items-center justify-center text-sky-300 shrink-0 shadow-sm">
+                  <MdiIcon icon={command.icon || command.mdi} className="w-5 h-5" />
+                </div>
+              )}
+              <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+                {command.name}
+              </h2>
+            </div>
             <p className="text-xs font-mono text-[var(--text-muted)] mt-1 flex items-center gap-1.5 flex-wrap">
               <span>ID: <span className="text-slate-200">{command.id}</span></span>
               <span>•</span>
@@ -189,6 +279,17 @@ export const CommandDetailModal: React.FC<CommandDetailModalProps> = ({
           >
             <FileCode className="w-4 h-4 inline-block mr-1.5" />
             Vector DBC Signal
+          </button>
+          <button
+            onClick={() => setActiveTab('homeassistant')}
+            className={`py-3 px-3 font-medium border-b-2 transition ${
+              activeTab === 'homeassistant'
+                ? 'border-[var(--md-sys-color-primary)] text-cyan-400 font-bold'
+                : 'border-transparent text-[var(--text-muted)] hover:text-slate-200'
+            }`}
+          >
+            <Home className="w-4 h-4 inline-block mr-1.5 text-sky-400" />
+            Home Assistant
           </button>
         </div>
 
@@ -275,36 +376,67 @@ export const CommandDetailModal: React.FC<CommandDetailModalProps> = ({
                 />
               </div>
 
-              {/* Options Breakdown if present */}
+              {/* Options / State Breakdown if present */}
               {command.options && command.options.length > 0 && (
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center gap-1.5">
-                    <Layers className="w-3.5 h-3.5 text-cyan-400" />
-                    Available Options ({command.options.length})
-                  </h4>
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
+                      <Layers className="w-3.5 h-3.5 text-cyan-400" />
+                      State Definitions & Rx CAN ID Decode Map ({command.options.length} Defined States)
+                    </h4>
+                    {onEdit && (
+                      <button
+                        onClick={() => onEdit(command)}
+                        className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold flex items-center gap-1 underline"
+                      >
+                        Edit State Mappings
+                      </button>
+                    )}
+                  </div>
                   <div className="overflow-hidden rounded-lg border border-slate-800">
                     <table className="w-full text-left text-xs">
                       <thead className="bg-slate-950/80 text-slate-400 border-b border-slate-800">
                         <tr>
-                          <th className="p-3">Option Label</th>
-                          <th className="p-3 font-mono">Transition (From → To)</th>
-                          <th className="p-3 font-mono">Match Pattern</th>
-                          <th className="p-3">Popup Toast</th>
+                          <th className="p-3">State Meaning / Label</th>
+                          <th className="p-3 font-mono">Code / Value</th>
+                          <th className="p-3 font-mono">RX CAN Match Pattern</th>
+                          <th className="p-3 font-mono">Action Frame (TX)</th>
+                          <th className="p-3">Description / Toast</th>
                           <th className="p-3 text-right">Default</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-800/60 font-mono">
                         {command.options.map((opt, idx) => (
                           <tr key={idx} className="hover:bg-slate-800/30 transition">
-                            <td className="p-3 font-sans font-medium text-white flex items-center gap-1.5 flex-wrap">
-                              <span>{opt.label}</span>
-                              {opt.requires_feature && (
-                                <span className="px-1.5 py-0.5 rounded text-[10px] bg-cyan-950/80 border border-cyan-800 text-cyan-300 font-mono">
-                                  req: {opt.requires_feature}
-                                </span>
-                              )}
+                            <td className="p-3 font-sans font-medium text-white">
+                              <div className="flex items-center gap-1.5 flex-wrap">
+                                <span className="font-semibold">{opt.label}</span>
+                                {opt.requires_feature && (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] bg-cyan-950/80 border border-cyan-800 text-cyan-300 font-mono">
+                                    req: {opt.requires_feature}
+                                  </span>
+                                )}
+                              </div>
                             </td>
                             <td className="p-3 text-cyan-300">
+                              {opt.state_value !== undefined && opt.state_value !== '' ? (
+                                <span className="bg-cyan-950/60 border border-cyan-800/60 px-2 py-0.5 rounded text-[11px] font-bold">
+                                  {opt.state_value}
+                                </span>
+                              ) : (
+                                <span className="text-slate-600">-</span>
+                              )}
+                            </td>
+                            <td className="p-3 text-slate-300">
+                              {opt.match_payload ? (
+                                <span className="text-cyan-400 bg-cyan-950/40 px-2 py-0.5 rounded border border-cyan-800/40 font-mono text-[11px]">
+                                  {opt.match_payload}
+                                </span>
+                              ) : (
+                                <span className="text-slate-600">-</span>
+                              )}
+                            </td>
+                            <td className="p-3 text-emerald-300">
                               {opt.steps && opt.steps.length > 0 ? (
                                 <div className="flex flex-col gap-1">
                                   <div className="flex items-center gap-1 flex-wrap">
@@ -346,17 +478,8 @@ export const CommandDetailModal: React.FC<CommandDetailModalProps> = ({
                                 <span className="text-slate-600">-</span>
                               )}
                             </td>
-                            <td className="p-3 text-slate-300">
-                              {opt.match_payload ? (
-                                <span className="text-cyan-400 bg-cyan-950/40 px-1.5 py-0.5 rounded border border-cyan-800/40">
-                                  {opt.match_payload}
-                                </span>
-                              ) : (
-                                <span className="text-slate-600">-</span>
-                              )}
-                            </td>
                             <td className="p-3 font-sans text-slate-400">
-                              {opt.popup || '-'}
+                              {opt.description || opt.popup || '-'}
                             </td>
                             <td className="p-3 text-right">
                               {opt.default ? (
@@ -426,6 +549,49 @@ export const CommandDetailModal: React.FC<CommandDetailModalProps> = ({
                       {command.requires_feature || 'None (Universal)'}
                     </div>
                   </div>
+                  {command.ha_domain && (() => {
+                    const domainStyle = getHaDomainBadgeStyle(command.ha_domain);
+                    return (
+                      <div className={`p-3 rounded-lg border ${domainStyle.bg} ${domainStyle.border}`}>
+                        <div className="text-slate-400 mb-1 flex items-center justify-between">
+                          <span>HA Domain</span>
+                          <span className={`w-2 h-2 rounded-full ${domainStyle.dot}`} />
+                        </div>
+                        <div className={`font-mono font-bold text-sm ${domainStyle.text}`}>
+                          {command.ha_domain}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                  {(command.icon || command.mdi) && (
+                    <div className="p-3 rounded-lg bg-sky-950/40 border border-sky-800/50">
+                      <div className="text-slate-400 mb-1 flex items-center justify-between">
+                        <span>Icon (MDI)</span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            navigator.clipboard.writeText(command.icon || command.mdi || '');
+                            setCopiedIcon(true);
+                            setTimeout(() => setCopiedIcon(false), 2000);
+                          }}
+                          className="text-slate-400 hover:text-white transition"
+                          title="Copy icon name"
+                        >
+                          {copiedIcon ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                        </button>
+                      </div>
+                      <div className="flex items-center gap-1.5 font-mono text-xs font-semibold text-sky-300 truncate">
+                        <MdiIcon icon={command.icon || command.mdi} className="w-4 h-4 text-sky-400 shrink-0" />
+                        <span className="truncate">{command.icon || command.mdi}</span>
+                      </div>
+                    </div>
+                  )}
+                  {command.device_class && (
+                    <div className="p-3 rounded-lg bg-slate-950/50 border border-slate-800">
+                      <div className="text-slate-400 mb-1">HA Device Class</div>
+                      <div className="font-mono text-cyan-300 font-semibold">{command.device_class}</div>
+                    </div>
+                  )}
                   {command.popup_message && (
                     <div className="p-3 col-span-2 rounded-lg bg-slate-950/50 border border-slate-800">
                       <div className="text-slate-400 mb-1">Popup OSD Message</div>
@@ -601,6 +767,93 @@ export const CommandDetailModal: React.FC<CommandDetailModalProps> = ({
                 {command.options && command.options.length > 0 && (
                   <p>
                     • Discrete states exported as DBC Value Table <code className="text-cyan-300 font-mono">VAL_</code>
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'homeassistant' && (
+            <div className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="text-xs text-slate-300 flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-md bg-sky-950/70 border border-sky-800/60 flex items-center justify-center text-sky-400">
+                    <Home className="w-3.5 h-3.5" />
+                  </div>
+                  <span>
+                    Home Assistant YAML configuration for <strong className="text-white font-mono">{command.name}</strong>
+                  </span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(haYamlSnippet);
+                    setCopiedHaYaml(true);
+                    setTimeout(() => setCopiedHaYaml(false), 2000);
+                  }}
+                  className="dash-outline-btn px-3 py-1.5 text-xs inline-flex items-center gap-1.5"
+                >
+                  {copiedHaYaml ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="text-emerald-300">Copied YAML</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy HA YAML</span>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* Entity Overview Pills */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+                <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <div className="text-slate-400 text-[10.5px] mb-0.5">HA Domain</div>
+                  <div className="font-mono font-bold text-sky-400 truncate">
+                    {command.ha_domain || 'sensor'}
+                  </div>
+                </div>
+                <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <div className="text-slate-400 text-[10.5px] mb-0.5">MDI Icon</div>
+                  <div className="flex items-center gap-1.5 font-mono text-cyan-300 truncate">
+                    <MdiIcon icon={command.icon || command.mdi} className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+                    <span className="truncate">{command.icon || command.mdi || 'mdi:car-info'}</span>
+                  </div>
+                </div>
+                <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <div className="text-slate-400 text-[10.5px] mb-0.5">Entity ID</div>
+                  <div className="font-mono text-slate-300 truncate text-[11px]">
+                    {command.ha_domain || 'sensor'}.can_do_{command.id}
+                  </div>
+                </div>
+                <div className="p-2.5 rounded-lg bg-slate-950/60 border border-slate-800">
+                  <div className="text-slate-400 text-[10.5px] mb-0.5">Device Class</div>
+                  <div className="font-mono text-emerald-300 truncate">
+                    {command.device_class || 'None'}
+                  </div>
+                </div>
+              </div>
+
+              <pre className="p-4 rounded-xl bg-slate-950 font-mono text-xs text-sky-300 overflow-x-auto border border-slate-800 leading-relaxed select-all">
+                {haYamlSnippet}
+              </pre>
+
+              <div className="p-3.5 rounded-lg bg-slate-900/60 border border-slate-800 text-[11px] text-slate-400 space-y-1.5">
+                <div className="text-slate-300 font-semibold flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                  Home Assistant Metadata Integration Guide
+                </div>
+                <p>
+                  • <strong className="text-slate-200">ha_domain</strong>: Maps this CAN message to the appropriate Home Assistant component architecture (<code className="text-orange-300 font-mono">notify</code> for cluster OSD popups and toasts, <code className="text-cyan-300 font-mono">event</code> for button/click triggers, <code className="text-teal-300 font-mono">binary_sensor</code> for two-state latches, <code className="text-emerald-300 font-mono">switch</code> for controllable outputs).
+                </p>
+                <p>
+                  • <strong className="text-slate-200">icon / mdi</strong>: Specifies the standard Material Design Icon (e.g. <code className="text-sky-300 font-mono">{command.icon || command.mdi || 'mdi:steering'}</code>) natively rendered across Home Assistant Lovelace dashboards, mobile apps, and Apple CarPlay/Android Auto.
+                </p>
+                {command.device_class && (
+                  <p>
+                    • <strong className="text-slate-200">device_class</strong>: Configures native Home Assistant state representation and telemetry units (<code className="text-amber-300 font-mono">{command.device_class}</code>).
                   </p>
                 )}
               </div>

@@ -462,6 +462,28 @@ export function validateCommand(
     });
   }
 
+  // Home Assistant ha_domain & icon/mdi validation
+  if (command.ha_domain) {
+    if (/[A-Z\s]/.test(command.ha_domain)) {
+      issues.push({
+        type: 'warning',
+        field: 'ha_domain',
+        message: `Home Assistant domain '${command.ha_domain}' should be lowercase without spaces (e.g. 'event', 'sensor', 'binary_sensor').`,
+        commandId: command.id
+      });
+    }
+  }
+
+  const iconVal = command.icon || command.mdi;
+  if (iconVal && !iconVal.startsWith('mdi:')) {
+    issues.push({
+      type: 'info',
+      field: 'icon',
+      message: `Home Assistant icon '${iconVal}' will be formatted with 'mdi:' prefix (e.g. 'mdi:${iconVal}').`,
+      commandId: command.id
+    });
+  }
+
   return issues;
 }
 

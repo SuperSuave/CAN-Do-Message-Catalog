@@ -429,7 +429,8 @@
         "trigger"
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "sw_mode",
@@ -446,7 +447,8 @@
         "trigger"
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "sw_speak",
@@ -463,7 +465,8 @@
         "trigger"
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "sw_call",
@@ -480,7 +483,8 @@
         "trigger"
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "sw_volume",
@@ -518,7 +522,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "sw_seek",
@@ -551,7 +556,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "sw_menu",
@@ -589,7 +595,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "steering_paddles",
@@ -625,7 +632,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "sw_cruise_cluster",
@@ -673,7 +681,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "blinker_stalks",
@@ -721,7 +730,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:car-light-dimmed"
+      "icon": "mdi:car-light-dimmed",
+      "mdi": "mdi:car-light-dimmed"
     },
     {
       "id": "steering_wheel_touch",
@@ -763,7 +773,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:steering"
+      "icon": "mdi:steering",
+      "mdi": "mdi:steering"
     },
     {
       "id": "gear_shifter_dial",
@@ -805,7 +816,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:car-shift-pattern"
+      "icon": "mdi:car-shift-pattern",
+      "mdi": "mdi:car-shift-pattern"
     },
     {
       "id": "hvac_touch_buttons",
@@ -868,7 +880,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "avn_star",
@@ -885,7 +898,8 @@
         "trigger"
       ],
       "ha_domain": "event",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "ev6_mode_strip",
@@ -903,7 +917,8 @@
         "trigger"
       ],
       "ha_domain": "event",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "camera_btn",
@@ -921,7 +936,8 @@
         "trigger"
       ],
       "ha_domain": "event",
-      "icon": "mdi:cctv"
+      "icon": "mdi:cctv",
+      "mdi": "mdi:cctv"
     },
     {
       "id": "cluster_brightness",
@@ -949,7 +965,8 @@
         }
       ],
       "ha_domain": "event",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "heated_wheel_btn",
@@ -967,7 +984,8 @@
         "trigger"
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:steering-wheel"
+      "icon": "mdi:steering-wheel",
+      "mdi": "mdi:steering-wheel"
     },
     {
       "id": "climate_rear_defog",
@@ -984,7 +1002,8 @@
         "trigger"
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "climate_temp_status",
@@ -1001,7 +1020,8 @@
         "trigger"
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "climate_fan_active",
@@ -1018,7 +1038,8 @@
         "trigger"
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "climate_recirc_on",
@@ -1035,7 +1056,8 @@
         "trigger"
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "remote_climate_state",
@@ -1071,7 +1093,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:radiator"
+      "icon": "mdi:radiator",
+      "mdi": "mdi:radiator"
     },
     {
       "id": "car_ready_state",
@@ -1102,7 +1125,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:power"
+      "icon": "mdi:power",
+      "mdi": "mdi:power"
     },
     {
       "id": "doors_status",
@@ -1175,7 +1199,8 @@
       ],
       "ha_domain": "binary_sensor",
       "icon": "mdi:car-door",
-      "device_class": "door"
+      "device_class": "door",
+      "mdi": "mdi:car-door"
     },
     {
       "id": "doors_lock_state",
@@ -1211,7 +1236,8 @@
         }
       ],
       "ha_domain": "lock",
-      "icon": "mdi:car-door"
+      "icon": "mdi:car-door",
+      "mdi": "mdi:car-door"
     },
     {
       "id": "seatbelts_status",
@@ -1259,7 +1285,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:seatbelt"
+      "icon": "mdi:seatbelt",
+      "mdi": "mdi:seatbelt"
     },
     {
       "id": "trunk",
@@ -1291,7 +1318,8 @@
       ],
       "ha_domain": "binary_sensor",
       "icon": "mdi:car-back",
-      "device_class": "door"
+      "device_class": "door",
+      "mdi": "mdi:car-back"
     },
     {
       "id": "charge_port",
@@ -1323,7 +1351,8 @@
       ],
       "ha_domain": "binary_sensor",
       "icon": "mdi:ev-plug-type2",
-      "device_class": "door"
+      "device_class": "door",
+      "mdi": "mdi:ev-plug-type2"
     },
     {
       "id": "hood",
@@ -1360,7 +1389,8 @@
       ],
       "ha_domain": "binary_sensor",
       "icon": "mdi:car-front",
-      "device_class": "door"
+      "device_class": "door",
+      "mdi": "mdi:car-front"
     },
     {
       "id": "sunroof_extended",
@@ -1415,7 +1445,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:window-open"
+      "icon": "mdi:window-open",
+      "mdi": "mdi:window-open"
     },
     {
       "id": "hazard_lights",
@@ -1446,7 +1477,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:car-light-dimmed"
+      "icon": "mdi:car-light-dimmed",
+      "mdi": "mdi:car-light-dimmed"
     },
     {
       "id": "wipers",
@@ -1477,7 +1509,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:wiper"
+      "icon": "mdi:wiper",
+      "mdi": "mdi:wiper"
     },
     {
       "id": "brake_pedal_state",
@@ -1513,7 +1546,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:car-brake-alert"
+      "icon": "mdi:car-brake-alert",
+      "mdi": "mdi:car-brake-alert"
     },
     {
       "id": "power_state",
@@ -1549,7 +1583,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:power"
+      "icon": "mdi:power",
+      "mdi": "mdi:power"
     },
     {
       "id": "drive_mode_state",
@@ -1591,7 +1626,8 @@
         }
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "drivers_seat_comfort",
@@ -1739,7 +1775,8 @@
         }
       ],
       "ha_domain": "select",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "passengers_seat_comfort",
@@ -1887,7 +1924,8 @@
         }
       ],
       "ha_domain": "select",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "rear_seats_comfort",
@@ -1924,7 +1962,8 @@
         }
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:car-seat-heater"
+      "icon": "mdi:car-seat-heater",
+      "mdi": "mdi:car-seat-heater"
     },
     {
       "id": "heated_steering_wheel_toggle",
@@ -1954,7 +1993,8 @@
         "action"
       ],
       "ha_domain": "switch",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "battery_preconditioning",
@@ -1997,7 +2037,8 @@
       ],
       "state_can_id": null,
       "ha_domain": "select",
-      "icon": "mdi:car-battery"
+      "icon": "mdi:car-battery",
+      "mdi": "mdi:car-battery"
     },
     {
       "id": "cluster_telemetry_popup",
@@ -2042,8 +2083,9 @@
         }
       ],
       "state_can_id": null,
-      "ha_domain": "button",
-      "icon": "mdi:car-info"
+      "ha_domain": "notify",
+      "icon": "mdi:message-badge",
+      "mdi": "mdi:message-badge"
     },
     {
       "id": "ev_charge_limits",
@@ -2321,7 +2363,8 @@
         }
       ],
       "ha_domain": "select",
-      "icon": "mdi:ev-station"
+      "icon": "mdi:ev-station",
+      "mdi": "mdi:ev-station"
     },
     {
       "id": "remote_climate_start____seats___wheel_",
@@ -2368,7 +2411,8 @@
         "action"
       ],
       "ha_domain": "button",
-      "icon": "mdi:car-seat-heater"
+      "icon": "mdi:car-seat-heater",
+      "mdi": "mdi:car-seat-heater"
     },
     {
       "id": "deep_sleep_network_wake_pulse",
@@ -2400,7 +2444,8 @@
         "action"
       ],
       "ha_domain": "button",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "set_target_cabin_temp",
@@ -2424,7 +2469,8 @@
       ],
       "state_can_id": null,
       "ha_domain": "climate",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "active_sound_design__asd__profile",
@@ -2477,7 +2523,8 @@
         "action"
       ],
       "ha_domain": "select",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "surround_view_camera",
@@ -2507,7 +2554,8 @@
         "action"
       ],
       "ha_domain": "button",
-      "icon": "mdi:cctv"
+      "icon": "mdi:cctv",
+      "mdi": "mdi:cctv"
     },
     {
       "id": "keepalive___wakeup_ping",
@@ -2532,7 +2580,8 @@
         "action"
       ],
       "ha_domain": "button",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "multi_frame_burst_sequence__x3_",
@@ -2561,7 +2610,8 @@
         "action"
       ],
       "ha_domain": "button",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "home_assistant_webhook_event",
@@ -2577,7 +2627,8 @@
       ],
       "state_can_id": null,
       "ha_domain": "button",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "mqtt_json_event_alert",
@@ -2594,7 +2645,8 @@
       ],
       "state_can_id": null,
       "ha_domain": "button",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "ambient_mood_lighting",
@@ -2663,7 +2715,8 @@
         "trigger"
       ],
       "ha_domain": "light",
-      "icon": "mdi:car-light-dimmed"
+      "icon": "mdi:car-light-dimmed",
+      "mdi": "mdi:car-light-dimmed"
     },
     {
       "id": "cond_speed_zero",
@@ -2677,7 +2730,8 @@
         "condition"
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:speedometer"
+      "icon": "mdi:speedometer",
+      "mdi": "mdi:speedometer"
     },
     {
       "id": "selected_gear",
@@ -2717,7 +2771,8 @@
         }
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:car-shift-pattern"
+      "icon": "mdi:car-shift-pattern",
+      "mdi": "mdi:car-shift-pattern"
     },
     {
       "id": "cond_doors_closed",
@@ -2734,7 +2789,8 @@
         "trigger"
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:car-door"
+      "icon": "mdi:car-door",
+      "mdi": "mdi:car-door"
     },
     {
       "id": "cond_climate_off",
@@ -2750,7 +2806,8 @@
         "condition"
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "cond_charging",
@@ -2767,7 +2824,8 @@
         "trigger"
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "cond_ambient_temperature",
@@ -2802,7 +2860,8 @@
         }
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:thermostat"
+      "icon": "mdi:thermostat",
+      "mdi": "mdi:thermostat"
     },
     {
       "id": "cond_hv_battery_soc",
@@ -2837,7 +2896,8 @@
         }
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:car-battery"
+      "icon": "mdi:car-battery",
+      "mdi": "mdi:car-battery"
     },
     {
       "id": "cond_aux_12v_battery",
@@ -2869,7 +2929,8 @@
         }
       ],
       "ha_domain": "sensor",
-      "icon": "mdi:car-battery"
+      "icon": "mdi:car-battery",
+      "mdi": "mdi:car-battery"
     },
     {
       "id": "cond_day_of_week",
@@ -2908,7 +2969,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     },
     {
       "id": "cond_time_window",
@@ -2940,7 +3002,8 @@
         }
       ],
       "ha_domain": "binary_sensor",
-      "icon": "mdi:car-info"
+      "icon": "mdi:car-info",
+      "mdi": "mdi:car-info"
     }
   ]
 }

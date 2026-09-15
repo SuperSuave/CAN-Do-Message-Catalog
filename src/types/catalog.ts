@@ -28,6 +28,8 @@ export interface CommandOption {
   default?: boolean;
   repeat?: number;
   requires_feature?: string;
+  state_value?: string | number;
+  description?: string;
 }
 
 export interface CommandStep {
@@ -63,6 +65,11 @@ export interface Command {
   options?: CommandOption[];
   steps?: CommandStep[];
   contributor?: ContributorInfo;
+  // Home Assistant & MDI Icon metadata
+  ha_domain?: string;
+  icon?: string;
+  mdi?: string;
+  device_class?: string;
   // Special types properties
   precon_mode?: string;
   precon_press?: string;

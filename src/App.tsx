@@ -52,6 +52,27 @@ export default function App() {
           if (defaultSeat && savedSeatIdx >= 0 && !parsed.commands[savedSeatIdx].action_can_id) {
             parsed.commands[savedSeatIdx] = { ...parsed.commands[savedSeatIdx], ...defaultSeat };
           }
+
+          const defaultPopup = DEFAULT_CATALOG.commands.find(c => c.id === 'cluster_telemetry_popup');
+          const savedPopupIdx = parsed.commands.findIndex((c: any) => c.id === 'cluster_telemetry_popup');
+          if (defaultPopup && savedPopupIdx >= 0 && parsed.commands[savedPopupIdx].ha_domain !== 'notify') {
+            parsed.commands[savedPopupIdx] = {
+              ...parsed.commands[savedPopupIdx],
+              ha_domain: 'notify',
+              icon: defaultPopup.icon || 'mdi:message-badge',
+              mdi: defaultPopup.mdi || 'mdi:message-badge'
+            };
+          }
+
+          parsed.commands.forEach((c: any) => {
+            if (!c.icon || !c.mdi) {
+              const def = DEFAULT_CATALOG.commands.find(dc => dc.id === c.id);
+              if (def) {
+                c.icon = c.icon || def.icon || def.mdi || 'mdi:car-info';
+                c.mdi = c.mdi || def.mdi || def.icon || 'mdi:car-info';
+              }
+            }
+          });
         }
         return parsed;
       }
@@ -289,13 +310,22 @@ export default function App() {
         const matchesTo = cmd.to_payload?.toLowerCase().includes(q);
         const matchesMatch = cmd.match_payload?.toLowerCase().includes(q);
         const matchesOptions = cmd.options?.some(
-          o => o.label.toLowerCase().includes(q) || o.payload?.toLowerCase().includes(q)
+          o =>
+            o.label.toLowerCase().includes(q) ||
+            o.payload?.toLowerCase().includes(q) ||
+            o.match_payload?.toLowerCase().includes(q) ||
+            o.to_payload?.toLowerCase().includes(q) ||
+            (o.state_value !== undefined && String(o.state_value).toLowerCase().includes(q)) ||
+            o.description?.toLowerCase().includes(q)
         );
         const cleanQ = q.replace(/^@/, '');
         const matchesContributor =
           (cmd.contributor?.name && cmd.contributor.name.toLowerCase().includes(cleanQ)) ||
           (cmd.contributor?.github && cmd.contributor.github.toLowerCase().includes(cleanQ)) ||
           (cmd.contributor?.notes && cmd.contributor.notes.toLowerCase().includes(cleanQ));
+        const matchesHaDomain = cmd.ha_domain?.toLowerCase().includes(q);
+        const matchesMdi = (cmd.icon?.toLowerCase().includes(q) || cmd.mdi?.toLowerCase().includes(q));
+        const matchesDeviceClass = cmd.device_class?.toLowerCase().includes(q);
 
         if (
           !matchesName &&
@@ -307,7 +337,10 @@ export default function App() {
           !matchesTo &&
           !matchesMatch &&
           !matchesOptions &&
-          !matchesContributor
+          !matchesContributor &&
+          !matchesHaDomain &&
+          !matchesMdi &&
+          !matchesDeviceClass
         ) {
           return false;
         }
